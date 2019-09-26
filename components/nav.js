@@ -94,16 +94,16 @@ class Header extends React.PureComponent {
 
     console.log(url)
 
-    // try {
-    //   const response = await axios.get(url, {
-    //     headers: {'Access-Control-Allow-Origin': '*'}
-    //   });
-    //   console.log('Success:', response);
-    //   alert(response)
-    // } catch (error) {
-    //   alert(error);
-    //   console.error('Error:', error);
-    // }
+    try {
+      const response = await axios.get(url, {
+        headers: {'Access-Control-Allow-Origin': '*'}
+      });
+      console.log('Success:', response);
+      alert(response)
+    } catch (error) {
+      alert(error);
+      console.error('Error:', error);
+    }
   }
 
 
