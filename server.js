@@ -10,7 +10,7 @@ app.prepare()
 .then(() => {
   const server = express();
   server.disable('x-powered-by');
-  // server.use(express.static('./public'));
+  server.use(express.static('./public'));
 
   server.get('/login/MP_verify_FdS96m4Og6Nb5Yrw.txt', (req, res) => {
     res.send('FdS96m4Og6Nb5Yrw');
