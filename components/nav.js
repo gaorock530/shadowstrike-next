@@ -92,15 +92,18 @@ class Header extends React.PureComponent {
     const state = '123abc';
     const url = `https://open.weixin.qq.com/connect/qrconnect?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&state=${state}#wechat_redirect`;
 
+    console.log(url)
 
-    try {
-      const response = await axios.get(url);
-      console.log('Success:', response);
-      alert(response)
-    } catch (error) {
-      alert(error);
-      console.error('Error:', error);
-    }
+    // try {
+    //   const response = await axios.get(url, {
+    //     headers: {'Access-Control-Allow-Origin': '*'}
+    //   });
+    //   console.log('Success:', response);
+    //   alert(response)
+    // } catch (error) {
+    //   alert(error);
+    //   console.error('Error:', error);
+    // }
   }
 
 

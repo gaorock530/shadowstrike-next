@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3000;
 app.prepare()
 .then(() => {
   const server = express();
+  server.disable('x-powered-by');
+  server.use(express.static('./public'));
+
   server.get('*', (req, res) => {
     return handle(req, res);
   });
