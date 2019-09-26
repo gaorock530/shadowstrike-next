@@ -8,7 +8,7 @@
 //   link.key = `nav-link-${link.href}-${link.label}`
 //   return link
 // })
-
+import axios from 'axios';
 import anime from 'animejs';
 
 const DIFF = 50;  
@@ -85,6 +85,22 @@ class Header extends React.PureComponent {
     })
   }
 
+  login = async () => {
+    const appid = 'wx09fc8bca51c925c7';
+    const redirect_uri = 'http://192.168.1.107:5000/redirect';
+    const scope = 'snsapi_userinfo';
+    const state = '123abc';
+    const url = `https://open.weixin.qq.com/connect/qrconnect?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&state=${state}#wechat_redirect`;
+
+
+    try {
+      const response = await axios.get(url);
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
 
   /**
    * 
@@ -114,7 +130,7 @@ class Header extends React.PureComponent {
             <a href="/" className="soon">服务</a>
             <a href="/">产品</a>
             <a href="/" className="soon">APIs</a>
-            <a href="/">Play Ground</a>
+            <a onClick={this.login}>Play Ground</a>
           </div>
           <div className="minibar" onClick={this.clickBar}></div>
         </div>
