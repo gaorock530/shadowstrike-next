@@ -96,7 +96,9 @@ class Header extends React.PureComponent {
     try {
       const response = await axios.get(url);
       console.log('Success:', response);
+      alert(response)
     } catch (error) {
+      alert(error);
       console.error('Error:', error);
     }
   }
