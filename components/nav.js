@@ -97,7 +97,7 @@ class Header extends React.PureComponent {
     try {
       const response = await axios.post(url);
       console.log('Success:', response);
-      res = JSON.stringify(response.data);
+      const res = JSON.stringify(response.data);
       alert(res)
     } catch (error) {
       alert(JSON.stringify(error));
