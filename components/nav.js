@@ -86,11 +86,11 @@ class Header extends React.PureComponent {
   }
 
   login = async () => {
-    const appid = 'wx09fc8bca51c925c7';
-    const redirect_uri = 'https%3A%2F%2yingxitech.com/login';
-    const scope = 'snsapi_userinfo';
-    const state = '123abc';
-    const url = `https://49.232.45.183:5000/wxlogin/getcode`;
+    // const appid = 'wx09fc8bca51c925c7';
+    // const redirect_uri = 'https%3A%2F%2yingxitech.com/login';
+    // const scope = 'snsapi_userinfo';
+    // const state = '123abc';
+    const url = `http://api.yingxitech.com/wxlogin/getcode`;
 
     console.log(url)
 
