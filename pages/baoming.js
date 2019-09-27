@@ -21,7 +21,8 @@ class Baoming extends React.PureComponent {
           <meta name="keywords" content="中原青少年艺术赛事网 中原 青少年 艺术 赛事" />
         </Head>
         <Body>
-          <h5>{this.props.query.nickname || '你好'}, 欢迎来到中原青少年艺术赛事网</h5>
+          <h5>你好，{this.props.query.nickname}</h5>
+          <h5>欢迎来到中原青少年艺术赛事网</h5>
 
           <div className="user-icon" style={{backgroundImage: `url('${this.props.query.pic || '/static/pic/back.jpeg'}')`}}></div>
           <h3>
