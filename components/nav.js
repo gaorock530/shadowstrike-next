@@ -87,17 +87,15 @@ class Header extends React.PureComponent {
 
   login = async () => {
     const appid = 'wx09fc8bca51c925c7';
-    const redirect_uri = 'http://192.168.1.107:5000/redirect';
+    const redirect_uri = 'https%3A%2F%2yingxitech.com/login';
     const scope = 'snsapi_userinfo';
     const state = '123abc';
-    const url = `https://open.weixin.qq.com/connect/qrconnect?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&state=${state}#wechat_redirect`;
+    const url = `https://49.232.45.183:5000/wxlogin/getcode`;
 
     console.log(url)
 
     try {
-      const response = await axios.get(url, {
-        headers: {'Access-Control-Allow-Origin': '*'}
-      });
+      const response = await axios.post(url);
       console.log('Success:', response);
       alert(response)
     } catch (error) {
