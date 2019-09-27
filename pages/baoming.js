@@ -5,15 +5,11 @@ import Body from '../components/body'
 
 class Baoming extends React.PureComponent {
 
-  constructor (props) {
-    super (props);
-    this.req = props.req;
+  static async getInitialProps({ req }) {
+    // const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
+    const query = req ? req.query : null;
+    return { query }
   }
-
-  // static async getInitialProps({ req }) {
-  //   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
-  //   return { userAgent }
-  // }
 
   render () {
     return (
@@ -28,7 +24,7 @@ class Baoming extends React.PureComponent {
             报名通道即将开启
           </div>
           <div>
-            {JSON.stringify(this.req)}
+            {JSON.stringify(this.props.query)}
           </div>
         </Body>
         
