@@ -16,9 +16,8 @@ app.prepare()
     res.send('FdS96m4Og6Nb5Yrw');
   })
 
-  server.get('/login', (req, res) => {
-    console.log(req.params)
-    res.send('login');
+  server.get('/shop/MP_verify_FdS96m4Og6Nb5Yrw.txt', (req, res) => {
+    res.send('FdS96m4Og6Nb5Yrw');
   })
 
   server.get('*', (req, res) => {
