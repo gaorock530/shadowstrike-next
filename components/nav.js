@@ -90,7 +90,7 @@ class Header extends React.PureComponent {
     // const redirect_uri = 'https%3A%2F%2yingxitech.com/login';
     // const scope = 'snsapi_userinfo';
     // const state = '123abc';
-    const url = `http://api.yingxitech.com/wxlogin/getcode`;
+    const url = `https://api.yingxitech.com/wxlogin/getcode`;
 
     console.log(url)
 
