@@ -90,12 +90,13 @@ class Header extends React.PureComponent {
     // const redirect_uri = 'https%3A%2F%2yingxitech.com/login';
     // const scope = 'snsapi_userinfo';
     // const state = '123abc';
-    const url = `https://api.yingxitech.com/wxlogin/getcode`;
+    // const url = `https://api.yingxitech.com/wxlogin/getcode`;
+    const url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx09fc8bca51c925c7&redirect_uri=https%3A%2F%2Fwww.yingxitech.com%2Flogin&response_type=code&scope=snsapi_userinfo&state=123abc#wechat_redirect`
 
     console.log(url)
 
     try {
-      const response = await axios.post(url);
+      const response = await axios.get(url);
       console.log('Success:', response);
       const res = JSON.stringify(response.data);
       alert(res)
