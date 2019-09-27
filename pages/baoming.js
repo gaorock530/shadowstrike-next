@@ -25,9 +25,8 @@ class Baoming extends React.PureComponent {
           <h5>欢迎来到中原青少年艺术赛事网</h5>
 
           <div className="user-icon" style={{backgroundImage: `url('${this.props.query.pic || '/static/pic/back.jpeg'}')`}}></div>
-          <h3>
-            报名通道将在10月1日开启
-          </h3>
+          <h2>报名通道将在10月1日开启</h2>
+          {this.props.query.subscribe?null:<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>}
         </div>
         
         
