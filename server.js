@@ -16,6 +16,11 @@ app.prepare()
     res.send('FdS96m4Og6Nb5Yrw');
   })
 
+  server.get('/login', (req, res) => {
+    console.log(req.params)
+    res.send('login');
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res);
   });
