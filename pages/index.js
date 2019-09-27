@@ -3,7 +3,8 @@ import Head from 'next/head'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
 import Body from '../components/body'
-import '../styles/style.scss'
+import '../styles/style.scss';
+import '../styles/index.scss';
 import Meta from '../components/meta'
 
 
