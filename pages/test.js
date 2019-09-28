@@ -95,6 +95,9 @@ async function getConfig () {
       body: {
         timestamp,
         noncestr
+      },
+      headers: {
+        'Content-Type': 'application/json'
       }
     });
     data = await res.json();;
