@@ -5,6 +5,7 @@ import Meta from '../components/bisaiMeta'
 import apiList from '../data/jsApiList';
 import {appId} from '../data/appId.json';
 import cuid from 'cuid';
+import BaomingForm from '../components/subpage/baoming_form';
 
 
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
@@ -127,7 +128,11 @@ class Test extends React.PureComponent {
     }
   }
 
+  
+
   render () {
+    
+
     return (
       <div className="baoming_body">
         <Meta/>
@@ -135,14 +140,23 @@ class Test extends React.PureComponent {
           <title>{page.pageTitle}</title>
           <script src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
         </Head>
-        <div className="relative_body">
-          <h5>你好</h5>
+        <div className="relative_body padding-size">
+
+          <h5>你好，{this.props.query?this.props.query.nickname: '朋友'}</h5>
+          <h5>欢迎来到中原青少年艺术赛事网</h5>
+
+          <div className="user-icon" style={{backgroundImage: `url('${(this.props.query && this.props.query.pic) || '/static/pic/back.jpeg'}')`}}></div>
+          <h2>报名通道将在10月1日开启</h2>
+          {this.props.query && this.props.query.subscribe === '1'?null:<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>}
+          <a className="test_link" href={`/test?openid=${this.props.query.openid}&token=${this.props.query.token}`}></a>
+          
           {/* <Link href="/test"></Link> */}
-          <p>{JSON.stringify(this.props.query)}</p>
+          {/* <p>{JSON.stringify(this.props.query)}</p>
           <p>user: {JSON.stringify(this.state.user)}</p>
           <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
           <p>{this.state.status}</p>
-          <p>{JSON.stringify(this.state.api)}</p>
+          <p>{JSON.stringify(this.state.api)}</p> */}
+          <BaomingForm/>
         </div>
       </div>
     )

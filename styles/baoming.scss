@@ -1,5 +1,6 @@
 @import './setup.scss';
 
+
 .baoming_body {
   position: fixed;
   top: 0;
@@ -7,12 +8,12 @@
   width: 100vw;
   height: 100vh;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   background-color: #333;
   color: #fff;
-  overflow: scroll;
+  overflow-y: scroll;
 
   h2 {
     padding: 20px 0;
@@ -48,4 +49,11 @@
   height: 50px;
   bottom: 0;
   margin: auto;
+}
+
+.baoming-form-wrapper {
+  padding: 35px 0;
+}
+.padding-size {
+  padding: 50px 0;
 }
