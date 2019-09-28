@@ -1,17 +1,10 @@
-@import './setup.scss';
+@import './baoming_setup.scss';
 
 
 .baoming_body {
   position: relative;
-  // top: 0;
-  // left: 0;
-  // width: 100vw;
-  // height: 100vh;
+  padding: 30px;
   text-align: center;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  background-color: #333;
   color: #fff;
 
   h2 {
