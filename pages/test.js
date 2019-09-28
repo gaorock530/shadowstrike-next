@@ -122,8 +122,7 @@ class Test extends React.PureComponent {
           <h5>你好</h5>
           {/* <Link href="/test"></Link> */}
           <p>{JSON.stringify(this.props.query)}</p>
-          <p>{JSON.stringify(this.state.user)}</p>
-          <p>localStorage: {this.state.localStorage?'支持':'不支持'}</p>
+          <p>user: {JSON.stringify(this.state.user)}</p>
           <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
           <p>{this.state.status}</p>
         </div>
