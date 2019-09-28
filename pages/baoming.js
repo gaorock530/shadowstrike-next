@@ -28,6 +28,7 @@ class Baoming extends React.PureComponent {
           imgUrl: 'https://yingxitech.com/static/bisai/android-chrome-192x192.png', // 分享图标
           success: function () {
             // 设置成功
+            alert('success1')
           }
         });
         wx.updateTimelineShareData({ 
@@ -36,11 +37,13 @@ class Baoming extends React.PureComponent {
           imgUrl: 'https://yingxitech.com/static/bisai/android-chrome-192x192.png', // 分享图标
           success: function () {
             // 设置成功
+            alert('success2')
           }
         })
       });
       wx.error(function(res){
         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+        alert(JSON.stringify(res));
       });
     }catch(e) {
 
