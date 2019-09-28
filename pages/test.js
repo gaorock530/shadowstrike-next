@@ -33,7 +33,7 @@ class Test extends React.PureComponent {
   async componentDidMount() {
     // check is New USER with Token
     let user, response;
-    if (this.props.query.token) {
+    if (this.props.query.token && this.props.query.token !== 'undefined') {
       window.localStorage.setItem('token', this.props.query.token);
 
       response = await fetch('https://api.yingxitech.com/user', {
@@ -51,7 +51,7 @@ class Test extends React.PureComponent {
       const token = window.localStorage? window.localStorage.getItem('token'): null;
       
 
-      if (token) {
+      if (token && token !== 'undefined') {
 
         response = await fetch('https://api.yingxitech.com/login', {
           method: 'POST',
@@ -74,10 +74,13 @@ class Test extends React.PureComponent {
         });
       }
 
+      console.log(response);
+
       if (response.ok) {
         user = await response.json();
-        this.setState({user, loggedIN: true});
-        window.localStorage.setItem('token', user.token);
+        console.log(user);
+        this.setState({user, loggedIN: user.user !== null});
+        if (user.token) window.localStorage.setItem('token', user.token);
       } else {
         this.setState({status: 'not from Weixin!!!'});
       }
