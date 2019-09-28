@@ -16,7 +16,14 @@ class Test extends React.PureComponent {
     }
   }
 
-  async componentDidMount () {
+  static async getInitialProps({ req }) {
+    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
+    const query = req ? req.query : null;
+    return { query, userAgent }
+  }
+
+  async componentDidMount() {
+    if (window && window.localStorage) this.setState({localStorage: true});
     this.setState({status: 'componentDidMount'});
     try {
       // const res = await getConfig();
@@ -52,16 +59,6 @@ class Test extends React.PureComponent {
       this.setState({status: JSON.stringify(e)});
       
     }
-  }
-
-  static async getInitialProps({ req }) {
-    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
-    const query = req ? req.query : null;
-    return { query, userAgent }
-  }
-
-  componentDidMount() {
-    if (window && window.localStorage) this.setState({localStorage: true});
   }
 
   render () {
