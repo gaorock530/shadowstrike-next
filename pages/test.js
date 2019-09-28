@@ -19,8 +19,8 @@ class Test extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      localStorage: false,
-      status: '',
+      localStorage: !!window.localStorage,
+      status: '空',
       loggedIN: false,
       user: null
     }
@@ -122,6 +122,7 @@ class Test extends React.PureComponent {
         <div className="relative_body">
           <h5>你好</h5>
           {/* <Link href="/test"></Link> */}
+          <p>{JSON.stringify(this.props.query)}</p>
           <p>{JSON.stringify(this.state.user)}</p>
           <p>localStorage: {this.state.localStorage?'支持':'不支持'}</p>
           <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
