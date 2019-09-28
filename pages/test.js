@@ -62,7 +62,8 @@ class Test extends React.PureComponent {
         });
 
       } else {
-        
+        window.localStorage.removeItem('token');
+
         response = await fetch('https://api.yingxitech.com/login', {
           method: 'POST',
           body: JSON.stringify({
@@ -74,12 +75,10 @@ class Test extends React.PureComponent {
         });
       }
 
-      console.log(response);
-
       if (response.ok) {
         user = await response.json();
-        console.log(user);
-        this.setState({user, loggedIN: user.user !== null});
+
+        this.setState({user: user.user !== null, loggedIN: user.user !== null});
         if (user.token) window.localStorage.setItem('token', user.token);
       } else {
         this.setState({status: 'not from Weixin!!!'});
