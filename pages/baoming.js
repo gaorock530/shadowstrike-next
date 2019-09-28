@@ -25,8 +25,8 @@ class Baoming extends React.PureComponent {
           <div className="user-icon" style={{backgroundImage: `url('${(this.props.query && this.props.query.pic) || '/static/pic/back.jpeg'}')`}}></div>
           <h2>报名通道将在10月1日开启</h2>
           {this.props.query && this.props.query.subscribe === '1'?null:<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>}
-
-          <Link href="/test?a=123"><a className="test_link"></a></Link>
+          <a className="test_link" href="/test?a=1"></a>
+          {/* <Link href={{ pathname: '/test', query: { name: 'Zeit' } }} passHref><a className="test_link"></a></Link> */}
         </div>
         
         
