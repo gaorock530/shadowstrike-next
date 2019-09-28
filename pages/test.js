@@ -32,11 +32,11 @@ class Test extends React.PureComponent {
 
   async componentDidMount() {
     // check is New USER with Token
-    let user;
+    let user, response;
     if (this.props.query.token) {
       window.localStorage.setItem('token', this.props.query.token);
 
-      user = await fetch('https://api.yingxitech.com/user', {
+      response = await fetch('https://api.yingxitech.com/user', {
         method: 'POST',
         body: JSON.stringify({openid: this.props.query.openid}),
         headers: {
@@ -53,7 +53,7 @@ class Test extends React.PureComponent {
 
       if (token) {
 
-        user = await fetch('https://api.yingxitech.com/login', {
+        response = await fetch('https://api.yingxitech.com/login', {
           method: 'POST',
           body: JSON.stringify({token}),
           headers: {
@@ -63,7 +63,7 @@ class Test extends React.PureComponent {
 
       } else {
         
-        user = await fetch('https://api.yingxitech.com/login', {
+        response = await fetch('https://api.yingxitech.com/login', {
           method: 'POST',
           body: JSON.stringify({
             openid: this.props.query.openid
@@ -74,9 +74,9 @@ class Test extends React.PureComponent {
         });
       }
 
-      if (user) {
-        data = await user.json();
-        this.setState({user: data, loggedIN: true});
+      if (response.ok) {
+        user = await response.json();
+        this.setState({user, loggedIN: true});
         window.localStorage.setItem('token', user.token);
       } else {
         this.setState({status: 'not from Weixin!!!'});
