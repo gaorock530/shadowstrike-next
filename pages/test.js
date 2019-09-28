@@ -32,26 +32,33 @@ class Test extends React.PureComponent {
 
   async componentDidMount() {
     // check is New USER with Token
+    let user;
     if (this.props.query.token) {
       window.localStorage.setItem('token', this.props.query.token);
 
       user = await fetch('https://api.yingxitech.com/user', {
         method: 'POST',
-        body: JSON.stringify({openid: this.props.query.openid})
+        body: JSON.stringify({openid: this.props.query.openid}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
 
     } else {
 
-      if (!this.props.query.openid) return; // !!!! Not Weixin access, Need spacial handle !!!!
+      if (!this.props.query.openid) return console.log('no openid!!'); // !!!! Not Weixin access, Need spacial handle !!!!
       // check if already logged in
       const token = window.localStorage? window.localStorage.getItem('token'): null;
-      let user;
+      
 
       if (token) {
 
         user = await fetch('https://api.yingxitech.com/login', {
           method: 'POST',
-          body: JSON.stringify({token})
+          body: JSON.stringify({token}),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
 
       } else {
@@ -60,12 +67,16 @@ class Test extends React.PureComponent {
           method: 'POST',
           body: JSON.stringify({
             openid: this.props.query.openid
-          })
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
       }
 
       if (user) {
-        this.setState({user, loggedIN: true});
+        data = await user.json();
+        this.setState({user: data, loggedIN: true});
         window.localStorage.setItem('token', user.token);
       } else {
         this.setState({status: 'not from Weixin!!!'});
@@ -150,7 +161,7 @@ async function getConfig () {
         'Content-Type': 'application/json'
       }
     });
-    data = await res.json();;
+    data = await res.json();
     console.log(data);
   }catch(e) {
     return JSON.stringify({type: 'request error', error: e});
