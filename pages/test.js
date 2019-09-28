@@ -20,17 +20,59 @@ class Test extends React.PureComponent {
     super(props)
     this.state = {
       localStorage: false,
-      status: ''
+      status: '',
+      loggedIN: false,
+      user: null
     }
   }
 
   static async getInitialProps({ req }) {
-    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
     const query = req ? req.query : null;
     return { query, userAgent }
   }
 
   async componentDidMount() {
+    // check is New USER with Token
+    if (this.props.query.token) {
+      window.localStorage.setItem('token', this.props.query.token);
+
+      user = await fetch('https://api.yingxitech.com/user', {
+        method: 'POST',
+        body: JSON.stringify({openid: this.props.query.openid})
+      });
+
+    } else {
+
+      if (!this.props.query.openid) return; // !!!! Not Weixin access, Need spacial handle !!!!
+      // check if already logged in
+      const token = window.localStorage? window.localStorage.getItem('token'): null;
+      let user, token;
+
+      if (token) {
+
+        user = await fetch('https://api.yingxitech.com/login', {
+          method: 'POST',
+          body: JSON.stringify({token})
+        });
+
+      } else {
+        
+        user = await fetch('https://api.yingxitech.com/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            openid: this.props.query.openid
+          })
+        });
+      }
+
+      if (user) {
+        this.setState({user, loggedIN: true});
+        window.localStorage.setItem('token', user.token);
+      } else {
+        this.setState({status: 'not from Weixin!!!'});
+      }
+
+    }
     if (window && window.localStorage) this.setState({localStorage: true});
     this.setState({status: 'componentDidMount'});
     try {
@@ -80,9 +122,9 @@ class Test extends React.PureComponent {
         <div className="relative_body">
           <h5>你好</h5>
           {/* <Link href="/test"></Link> */}
-          <p>{JSON.stringify(this.props.query)}</p>
-          <p>{JSON.stringify(this.props.userAgent)}</p>
+          <p>{JSON.stringify(this.state.user)}</p>
           <p>localStorage: {this.state.localStorage?'支持':'不支持'}</p>
+          <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
           <p>{this.state.status}</p>
         </div>
       </div>
