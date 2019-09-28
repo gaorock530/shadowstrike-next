@@ -19,7 +19,6 @@ class Test extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      localStorage: !!window.localStorage,
       status: '空',
       loggedIN: false,
       user: null
@@ -73,7 +72,7 @@ class Test extends React.PureComponent {
       }
 
     }
-    if (window && window.localStorage) this.setState({localStorage: true});
+
     this.setState({status: 'componentDidMount'});
     try {
       const res = await getConfig();
