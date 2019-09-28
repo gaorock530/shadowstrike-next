@@ -25,6 +25,9 @@
     font-weight: 300;
     font-size: 12px;
   }
+  p {
+    word-break: break-all;
+  }
 }
 
 .user-icon {
