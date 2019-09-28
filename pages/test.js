@@ -92,10 +92,10 @@ async function getConfig () {
   try {
     const res = await fetch('https://api.yingxitech.com/wxconfig', {
       method: 'POST',
-      body: {
+      body: JSON.stringify({
         timestamp,
         noncestr
-      },
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
