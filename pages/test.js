@@ -1,10 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import '../styles/baoming.scss'
 import Meta from '../components/bisaiMeta'
 import apiList from '../data/jsApiList';
 import {appId} from '../data/appId.json';
+import cuid from 'cuid';
 
 
 class Test extends React.PureComponent {
