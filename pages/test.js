@@ -94,7 +94,8 @@ async function getConfig () {
       method: 'POST',
       body: JSON.stringify({
         timestamp,
-        noncestr
+        noncestr,
+        url: window.location.href
       }),
       headers: {
         'Content-Type': 'application/json'
