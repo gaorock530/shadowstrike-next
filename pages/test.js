@@ -21,7 +21,8 @@ class Test extends React.PureComponent {
     this.state = {
       status: '空',
       loggedIN: false,
-      user: null
+      user: null,
+      api: ''
     }
   }
 
@@ -43,6 +44,8 @@ class Test extends React.PureComponent {
           'Content-Type': 'application/json'
         }
       });
+
+      this.setState({api: response});
 
     } else {
 
@@ -138,6 +141,7 @@ class Test extends React.PureComponent {
           <p>user: {JSON.stringify(this.state.user)}</p>
           <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
           <p>{this.state.status}</p>
+          <p>{this.state.api}</p>
         </div>
       </div>
     )
