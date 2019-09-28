@@ -52,11 +52,11 @@ class Test extends React.PureComponent {
       });
       wx.error(function(res){
         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-        this.setState({status: JSON.stringify(res)});
+        this.setState({status: JSON.stringify({type: 'config error', error: res})});
       });
     }catch(e) {
       console.log(e)
-      this.setState({status: JSON.stringify(e)});
+      this.setState({status: JSON.stringify({type: 'setup error', error: e})});
       
     }
   }
@@ -100,8 +100,7 @@ async function getConfig () {
     data = await res.json();;
     console.log(data);
   }catch(e) {
-    console.log(e);
-    return JSON.stringify(e);
+    return JSON.stringify({type: 'request error', error: e});
   }
   wx.config({
     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -111,5 +110,5 @@ async function getConfig () {
     signature: data.signature,// 必填，签名
     jsApiList: apiList // 必填，需要使用的JS接口列表
   });
-  return 'config finished';
+  return 'config finished:' + JSON.stringify(data);
 }
