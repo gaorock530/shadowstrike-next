@@ -150,12 +150,11 @@ class Test extends React.PureComponent {
           {this.props.query && this.props.query.subscribe === '1'?null:<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>}
           <a className="test_link" href={`/test?openid=${this.props.query.openid}&token=${this.props.query.token}`}></a>
           
-          {/* <Link href="/test"></Link> */}
-          {/* <p>{JSON.stringify(this.props.query)}</p>
+          <p>{JSON.stringify(this.props.query)}</p>
           <p>user: {JSON.stringify(this.state.user)}</p>
           <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
           <p>{this.state.status}</p>
-          <p>{JSON.stringify(this.state.api)}</p> */}
+          <p>{JSON.stringify(this.state.api)}</p>
           <BaomingForm/>
         </div>
       </div>
