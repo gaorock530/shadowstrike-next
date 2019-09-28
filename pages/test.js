@@ -45,7 +45,8 @@ class Test extends React.PureComponent {
         }
       });
 
-      this.setState({api: response});
+      if (response.ok) this.setState({api: '/user'});
+      
 
     } else {
 
@@ -64,6 +65,7 @@ class Test extends React.PureComponent {
           }
         });
 
+
       } else {
         window.localStorage.removeItem('token');
 
@@ -77,16 +79,15 @@ class Test extends React.PureComponent {
           }
         });
       }
+    }
+    if (response.ok) {
+      user = await response.json();
+      console.log(user)
 
-      if (response.ok) {
-        user = await response.json();
-
-        this.setState({user: user.user !== null, loggedIN: user.user !== null});
-        if (user.token) window.localStorage.setItem('token', user.token);
-      } else {
-        this.setState({status: 'not from Weixin!!!'});
-      }
-
+      this.setState({user: !user.user, loggedIN: !user.user});
+      if (user.token) window.localStorage.setItem('token', user.token);
+    } else {
+      this.setState({status: 'not from Weixin!!!'});
     }
 
     this.setState({status: 'componentDidMount'});
