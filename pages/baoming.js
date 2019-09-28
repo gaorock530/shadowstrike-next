@@ -8,6 +8,12 @@ import {appId} from '../data/appId.json';
 
 
 class Baoming extends React.PureComponent {
+  constructor (props) {
+    super(props);
+    this.state = {
+      status: ''
+    }
+  }
 
   static async getInitialProps({ req }) {
     // const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
@@ -16,9 +22,10 @@ class Baoming extends React.PureComponent {
   }
 
   async componentDidMount () {
+    this.setState({status: 'componentDidMount'});
     try {
-      await getConfig();
-
+      const res = await getConfig();
+      this.setState({status: res});
       wx.ready(function(){
         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
         wx.updateAppMessageShareData({ 
@@ -28,7 +35,7 @@ class Baoming extends React.PureComponent {
           imgUrl: 'https://yingxitech.com/static/bisai/android-chrome-192x192.png', // 分享图标
           success: function () {
             // 设置成功
-            alert('success1')
+            this.setState({status: 'updateAppMessageShareData ok'});
           }
         });
         wx.updateTimelineShareData({ 
@@ -37,16 +44,18 @@ class Baoming extends React.PureComponent {
           imgUrl: 'https://yingxitech.com/static/bisai/android-chrome-192x192.png', // 分享图标
           success: function () {
             // 设置成功
-            alert('success2')
+            this.setState({status: 'updateTimelineShareData ok'});
           }
         })
       });
       wx.error(function(res){
         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-        alert(JSON.stringify(res));
+        this.setState({status: JSON.stringify(res)});
       });
     }catch(e) {
-
+      console.log(e)
+      this.setState({status: JSON.stringify(e)});
+      
     }
   }
 
@@ -66,7 +75,7 @@ class Baoming extends React.PureComponent {
           <h2>报名通道将在10月1日开启</h2>
           {this.props.query && this.props.query.subscribe === '1'?null:<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>}
           <a className="test_link" href="/test?a=1"></a>
-          {/* <Link href={{ pathname: '/test', query: { name: 'Zeit' } }} passHref><a className="test_link"></a></Link> */}
+          <p>{this.state.status}</p>
         </div>
         
         
@@ -91,18 +100,19 @@ async function getConfig () {
         noncestr
       }
     });
-    data = res.data;
+    data = await res.json();;
+    console.log(data);
   }catch(e) {
     console.log(e);
-    throw e;
+    return JSON.stringify(e);
   }
   wx.config({
     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId, // 必填，公众号的唯一标识
     timestamp, // 必填，生成签名的时间戳
-    nonceStr, // 必填，生成签名的随机串
+    nonceStr: noncestr, // 必填，生成签名的随机串
     signature: data.signature,// 必填，签名
     jsApiList: apiList // 必填，需要使用的JS接口列表
   });
-  return true;
+  return 'config finished';
 }
