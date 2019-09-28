@@ -46,7 +46,7 @@ class Test extends React.PureComponent {
       if (!this.props.query.openid) return; // !!!! Not Weixin access, Need spacial handle !!!!
       // check if already logged in
       const token = window.localStorage? window.localStorage.getItem('token'): null;
-      let user, token;
+      let user;
 
       if (token) {
 
