@@ -28,7 +28,7 @@ class Test extends React.PureComponent {
 
   static async getInitialProps({ req }) {
     const query = req ? req.query : null;
-    return { query, userAgent }
+    return { query }
   }
 
   async componentDidMount() {
