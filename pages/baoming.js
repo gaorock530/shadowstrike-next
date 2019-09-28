@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import '../styles/baoming.scss'
+import Meta from '../components/bisaiMeta'
 
 
 class Baoming extends React.PureComponent {
@@ -15,6 +16,7 @@ class Baoming extends React.PureComponent {
   render () {
     return (
       <div className="baoming_body">
+        <Meta/>
         <Head>
           <title>报名通道</title>
         </Head>
