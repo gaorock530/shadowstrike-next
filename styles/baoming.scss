@@ -2,18 +2,17 @@
 
 
 .baoming_body {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  position: relative;
+  // top: 0;
+  // left: 0;
+  // width: 100vw;
+  // height: 100vh;
   text-align: center;
   // display: flex;
   // justify-content: center;
   // align-items: center;
   background-color: #333;
   color: #fff;
-  overflow-y: scroll;
 
   h2 {
     padding: 20px 0;
