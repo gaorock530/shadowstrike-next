@@ -7,6 +7,14 @@ import {appId} from '../data/appId.json';
 import cuid from 'cuid';
 
 
+const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
+const page = {
+  pageTitle: '测试页面',
+  shareTitle: '报名通道',
+  shareDesc: '中原青少年艺术赛事网，报名通道即将开启',
+  shareLink: 'https://yingxitech.com/test'
+}
+
 class Test extends React.PureComponent {
   constructor (props) {
     super(props)
@@ -31,19 +39,19 @@ class Test extends React.PureComponent {
       wx.ready(function(){
         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
         wx.updateAppMessageShareData({ 
-          title: '报名通道', // 分享标题
-          desc: '中原青少年艺术赛事网，报名通道即将开启', // 分享描述
-          link: 'https://yingxitech.com/baoming', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: 'https://yingxitech.com/static/bisai/android-chrome-192x192.png', // 分享图标
+          title: page.shareTitle, // 分享标题
+          desc: page.shareDesc, // 分享描述
+          link: page.shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: icon_url, // 分享图标
           success: function () {
             // 设置成功
             this.setState({status: 'updateAppMessageShareData ok'});
           }
         });
         wx.updateTimelineShareData({ 
-          title: '报名通道', // 分享标题
-          link: 'https://yingxitech.com/baoming', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: 'https://yingxitech.com/static/bisai/android-chrome-192x192.png', // 分享图标
+          title: page.shareTitle, // 分享标题
+          link: page.shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: icon_url, // 分享图标
           success: function () {
             // 设置成功
             this.setState({status: 'updateTimelineShareData ok'});
@@ -66,7 +74,7 @@ class Test extends React.PureComponent {
       <div className="baoming_body">
         <Meta/>
         <Head>
-          <title>测试页面</title>
+          <title>{page.pageTitle}</title>
           <script src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
         </Head>
         <div className="relative_body">
