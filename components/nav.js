@@ -135,7 +135,7 @@ class Header extends React.PureComponent {
             <a href="/" className="soon">服务</a>
             <a href="/">产品</a>
             <a href="/" className="soon">APIs</a>
-            <a onClick={this.login}>Play Ground</a>
+            <a href="/">Play Ground</a>
           </div>
           <div className="minibar" onClick={this.clickBar}></div>
         </div>

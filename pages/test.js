@@ -155,7 +155,7 @@ class Test extends React.PureComponent {
           <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
           <p>{this.state.status}</p>
           <p>{JSON.stringify(this.state.api)}</p>
-          <BaomingForm/>
+          <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'}/>
         </div>
       </div>
     )

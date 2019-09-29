@@ -10,6 +10,19 @@
     font-size: 0.9rem;
     font-weight: normal;
   }
+
+  .form-error-msg {
+    position: relative;
+    background-color: red;
+    margin:auto;
+    width: 99.5%;
+    text-align: left;
+    border-radius: 5px;
+    p {
+      color: #000;
+      padding: 5px 10px;
+    }
+  }
 }
 
 .form-component {
@@ -22,10 +35,11 @@
     font-size: 1rem;
     appearance: none;
     -webkit-appearance: none; 
-    border-color: #000;
+    border-color: #111;
     background-color: #ddd;
     outline: none;
     border-radius: 5px;
+    border-width: 1px;
 
     &:focus {
       outline: none;
@@ -40,7 +54,6 @@
 
   input {
     padding: 10px 20px;
-    border: none;
     vertical-align: middle;
   }
 
@@ -52,11 +65,38 @@
     border-radius: 5px;
     appearance: none;
     -webkit-appearance: none; 
-    border-color: #000;
+    border-color: #111;
     background-color: rgb(2, 48, 117);
     color: #fff;
     margin-top: 40px; 
+    cursor: pointer;
   }
+
+  .error {
+    color: red;
+  }
+
+  .pass {
+    color: green;
+  }
+}
+
+.form-code {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+
+  &>* {
+    flex: 1;
+  }
+
+  button {
+    margin: 0;
+  }
+}
+
+.form-lock {
+  color: #999 !important;
 }
 
 .form-icon {
