@@ -30,7 +30,7 @@ const DefaultProvinceIndex = 15;
     const map = window.localStorage.getItem('map');
     const hash = map?hex_md5(map):null;
 
-    const newMap = await fetch('http://localhost:5000/map/citylist', {
+    const newMap = await fetch('https://api.yingxitech.com/map/citylist', {
       method: 'POST',
       body: JSON.stringify({hash}),
       headers: {
