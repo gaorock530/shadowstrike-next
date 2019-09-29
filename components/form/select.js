@@ -26,7 +26,7 @@ import cuid from 'cuid';
   render () {
     return (
       <div className="form-component-wrapper">
-        <h3>{this.props.title || '缺省'}:</h3>
+        {this.props.title && <h3>{this.props.title}:</h3>}
         <div className="form-component">
           <select onChange={this.onChange}>{this.renderOps(this.ops)}</select>
           <FontAwesomeIcon icon={faSort} className="form-icon"/>

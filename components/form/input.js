@@ -35,7 +35,7 @@ class Input extends React.PureComponent {
 
     return (
       <div className="form-component-wrapper">
-        {this.props.title && <h3>{this.props.title}</h3>}
+        {this.props.title && <h3>{this.props.title}:</h3>}
         <div className="form-component">
           {this.state.valid !==0 ? <FontAwesomeIcon icon={this.state.valid === 1?faCheck:faTimes} className={'form-icon' + name}/>: null}
           <input onBlur={this.onBlur} type={this.type} placeholder={this.props.placeholder} readOnly={this.props.lock} onChange={this.onChange} className={this.props.lock?'form-lock':null}/>
