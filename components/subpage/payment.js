@@ -23,6 +23,7 @@ class Payment extends React.PureComponent {
     }
 
     prepayJson['success'] = success;
+    delete prepayJson['appId'];
 
     wx.chooseWXPay(prepayJson);
 
