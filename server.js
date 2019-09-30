@@ -12,9 +12,9 @@ app.prepare()
   server.disable('x-powered-by');
   server.use(express.static('./public'));
 
-  // server.get('/baoming/MP_verify_FdS96m4Og6Nb5Yrw.txt', (req, res) => {
-  //   res.send('FdS96m4Og6Nb5Yrw');
-  // })
+  server.get('/pay/MP_verify_FdS96m4Og6Nb5Yrw.txt', (req, res) => {
+    res.send('FdS96m4Og6Nb5Yrw');
+  })
 
   // server.get('/shop/MP_verify_FdS96m4Og6Nb5Yrw.txt', (req, res) => {
   //   res.send('FdS96m4Og6Nb5Yrw');
