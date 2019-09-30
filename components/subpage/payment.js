@@ -8,7 +8,7 @@ import {hex_md5} from '../../lib/md5';
 class Payment extends React.PureComponent {
 
   pay = async () => {
-    const prepay = await fetch('http://192.168.1.107:5000/pay/request', {
+    const prepay = await fetch('https://api.yingxitech.com/pay/request', {
       method: 'POST',
       body: JSON.stringify({openid: this.props.openid}),
       headers: {'Content-Type': 'application/json'}
