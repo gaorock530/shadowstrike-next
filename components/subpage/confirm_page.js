@@ -8,7 +8,7 @@ class Comfirm extends React.PureComponent {
 
   baoming = async () => {
     try {
-      const baomingRes = await fetch('http://localhost:5000/baoming', {
+      const baomingRes = await fetch('https://api.yingxitech.com/baoming', {
         method: 'POST',
         body: JSON.stringify({
           openid: this.props.openid,
@@ -28,7 +28,9 @@ class Comfirm extends React.PureComponent {
         }
       });
 
-      if (baomingRes.data.err) return;
+      const baomingJson = await baomingRes.json();
+
+      if (baomingJson.err) return;
 
       if (this.props.onSubmit) this.props.onSubmit();
     }catch(e) {
