@@ -170,3 +170,27 @@
     cursor: pointer;
   }
 }
+
+.notweixin {
+  text-align: center;
+  color: #fff;
+  img {
+    position: relative;
+    margin: auto;
+
+    margin-top:50px;
+  }
+  p {
+    text-align: left;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 5px;
+  }
+  h2 {
+    padding: 30px 0;
+  }
+  h4 {
+    padding: 20px 0;
+    border-bottom: 2px solid #fff;
+  }
+}

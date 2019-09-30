@@ -8,6 +8,7 @@ import cuid from 'cuid';
 import BaomingForm from '../components/subpage/baoming_form';
 import Confirm from '../components/subpage/confirm_page';
 import Payment from '../components/subpage/payment';
+import NotWeiXin from '../components/subpage/notWeixin';
 
 
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
@@ -54,7 +55,7 @@ class Pay extends React.PureComponent {
 
     } else {
 
-      if (!this.props.query.openid) return console.log('no openid!! not from Weixin!!!'); // !!!! Not Weixin access, Need spacial handle !!!!
+      if (!this.props.query.openid || this.props.query.openid === 'undefined') return; // !!!! Not Weixin access, Need spacial handle !!!!
       // check if already logged in
       const token = window.localStorage? window.localStorage.getItem('token'): null;
       
@@ -147,7 +148,7 @@ class Pay extends React.PureComponent {
   
 
   render () {
-    
+    if(!this.props.query.openid || this.props.query.openid === 'undefined') return <NotWeiXin/>
 
     return (
       <div className="baoming_body">
