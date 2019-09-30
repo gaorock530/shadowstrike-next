@@ -30,7 +30,6 @@ const errMsg3 = "验证码不正确";
       contectPhone: '',
       lockPhone: false,
       code: '',
-      valid_code: 0,
       valid_name: false,
       valid_showName: false,
       valid_contectPhone: false,
@@ -51,31 +50,33 @@ const errMsg3 = "验证码不正确";
     e.preventDefault();
     e.stopPropagation();
     clearTimeout(this.timer)
-    // if (!this.state.valid_name || 
-    //   !this.state.valid_showName || 
-    //   !this.state.valid_contectPhone || 
-    //   (this.state.groupType !== 0 && !this.state.valid_groupName)) return;
+    if (!this.state.valid_name || 
+      !this.state.valid_showName || 
+      !this.state.valid_contectPhone || 
+      (this.state.groupType !== 0 && !this.state.valid_groupName)) return;
 
-    // const codeVerify = await fetch('https://api.yingxitech.com/code/verify', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     openid: this.props.openid,
-    //     phone: this.state.contectPhone,
-    //     code: this.state.code
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // });
-    // if (!codeVerify.data) {
-    //   clearTimeout(this.timer);
-    //   console.log(this.state)
-    //   this.props.onConfirm(this.state)
-    // } else {
-    //   this.setState({showError: true});
-    //   this.timer = setTimeout(() => {this.setState({showError: false})}, 3000);
-    // }
-    this.props.onConfirm(this.state)
+    const codeVerify = await fetch('https://api.yingxitech.com/code/verify', {
+      method: 'POST',
+      body: JSON.stringify({
+        openid: this.props.openid,
+        phone: this.state.contectPhone,
+        code: this.state.code
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const codeRes = await codeVerify.json();
+
+    if (!codeRes.err) {
+      clearTimeout(this.timer);
+      console.log(this.state)
+      this.props.onConfirm(this.state)
+    } else {
+      this.setState({showError: true});
+      this.timer = setTimeout(() => {this.setState({showError: false})}, 3000);
+    }
   }
 
   validateName = (value) => {

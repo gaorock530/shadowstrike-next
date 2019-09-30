@@ -3,23 +3,39 @@ import '../../styles/form.scss';
 import {ops, type, groupType} from '../../lib/formData';
 
 
+
 class Comfirm extends React.PureComponent {
 
-  baoming = () => {
-    // try {
-    //   const codeRes = await fetch('https://api.yingxitech.com/code/get', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       openid: this.props.openid,
-    //       phone: this.state.contectPhone
-    //     }),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   })
-    // }catch(e) {
+  baoming = async () => {
+    try {
+      const baomingRes = await fetch('http://localhost:5000/baoming', {
+        method: 'POST',
+        body: JSON.stringify({
+          openid: this.props.openid,
+          name: this.props.formData.name,
+          sex: this.props.formData.sex,
+          age: this.props.formData.age,
+          area: this.props.formData.area,
+          type: this.props.formData.type,
+          cate: this.props.formData.cate,
+          showName: this.props.formData.name,
+          phone: this.props.formData.contectPhone,
+          groupType: this.props.formData.groupType,
+          groupName: this.props.formData.groupName
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-    // }
+      if (baomingRes.data.err) return;
+
+      if (this.props.onSubmit) this.props.onSubmit();
+    }catch(e) {
+
+    }
+
+    
   }
 
   renderTable = (arr) => arr.map((a, index) => <tr key={index}><th>{a.t}:</th><td>{a.v}</td></tr>)
@@ -48,7 +64,7 @@ class Comfirm extends React.PureComponent {
         </table>}
         <div className="form-component-wrapper">
           <div className="form-component">
-            <button onClick={this.props.onSubmit} disabled={!formData}>确认报名</button>
+            <button onClick={this.baoming} disabled={!formData}>确认报名</button>
           </div>
         </div>
       </div>

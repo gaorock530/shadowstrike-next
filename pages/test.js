@@ -48,12 +48,12 @@ class Test extends React.PureComponent {
         }
       });
 
-      if (response.ok) this.setState({api: '/user'});
+      if (response.ok) console.log('api: /user');
       
 
     } else {
 
-      if (!this.props.query.openid) return console.log('no openid!!'); // !!!! Not Weixin access, Need spacial handle !!!!
+      if (!this.props.query.openid) return console.log('no openid!! not from Weixin!!!'); // !!!! Not Weixin access, Need spacial handle !!!!
       // check if already logged in
       const token = window.localStorage? window.localStorage.getItem('token'): null;
       
@@ -90,13 +90,12 @@ class Test extends React.PureComponent {
       this.setState({user: !user.user, loggedIN: !user.user});
       if (user.token) window.localStorage.setItem('token', user.token);
     } else {
-      this.setState({status: 'not from Weixin!!!'});
+      console.log('not from Weixin!!!')
     }
 
-    this.setState({status: 'componentDidMount'});
     try {
       const res = await getConfig();
-      this.setState({status: res});
+      console.log('config', res);
       wx.ready(function(){
         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
         wx.updateAppMessageShareData({ 
@@ -167,6 +166,7 @@ class Test extends React.PureComponent {
               <p>{JSON.stringify(this.state.api)}</p>
               {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onConfirm={this.onConfirm}/>}
               {this.state.stage === 1 && <Confirm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onSubmit} formData={this.formData}/>}
+              {this.state.stage === 2 && <div>Confirmed!</div>}
             </div>
           }
         </div>
