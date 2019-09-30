@@ -7,6 +7,7 @@ import {appId} from '../data/appId.json';
 import cuid from 'cuid';
 import BaomingForm from '../components/subpage/baoming_form';
 import Confirm from '../components/subpage/confirm_page';
+import Payment from '../components/subpage/payment';
 
 
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
@@ -25,7 +26,7 @@ class Test extends React.PureComponent {
       loggedIN: false,
       user: null,
       api: '',
-      stage: 0,
+      stage: 2,
     }
   }
 
@@ -138,6 +139,11 @@ class Test extends React.PureComponent {
   onSubmit = () => {
     this.setState({stage: 2});
   }
+
+  onAfterPay = (status) => {
+    console.log('after pay');
+    this.setState({stage: 3, status});
+  }
   
 
   render () {
@@ -156,17 +162,17 @@ class Test extends React.PureComponent {
           <h5>欢迎来到中原青少年艺术赛事网</h5>
 
           <div className="user-icon" style={{backgroundImage: `url('${(this.props.query && this.props.query.pic) || '/static/pic/back.jpeg'}')`}}></div>
-          <h2>报名通道将在10月1日开启</h2>
           {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
-              <p>{JSON.stringify(this.props.query)}</p>
+              {/* <p>{JSON.stringify(this.props.query)}</p>
               <p>user: {JSON.stringify(this.state.user)}</p>
               <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
               <p>{this.state.status}</p>
-              <p>{JSON.stringify(this.state.api)}</p>
+              <p>{JSON.stringify(this.state.api)}</p> */}
               {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onConfirm={this.onConfirm}/>}
               {this.state.stage === 1 && <Confirm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onSubmit} formData={this.formData}/>}
-              {this.state.stage === 2 && <div>Confirmed!</div>}
+              {this.state.stage === 2 && <Payment openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onAfterPay}/>}
+              {this.state.stage === 3 && <div>after pay: {this.state.status}</div>}
             </div>
           }
         </div>
