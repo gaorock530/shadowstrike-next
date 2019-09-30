@@ -115,3 +115,26 @@
     flex: 1;
   }
 }
+
+.form-confirm-wrapper {
+  position: relative;
+  margin: auto;
+  max-width: 800px;
+  width: 90vw;
+  word-break: break-all;
+
+  table {
+    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td, th {
+    border: 1px solid #666;
+    padding: 5px 10px;
+  }
+
+  td {
+    font-weight: 300;
+  }
+}

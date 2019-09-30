@@ -2,36 +2,12 @@ import React from 'react';
 import validator from 'validator';
 import '../../styles/form.scss';
 import cuid from 'cuid';
+import {ops, renderAge, type, groupType} from '../../lib/formData';
 import Select from '../form/select';
 import Area from '../form/area';
 import Input from '../form/input';
 import Button from '../form/button';
 import Code from '../form/code';
-
-// 选报大赛
-const ops = [
-  {name: '中国之星'},
-  {name: '金玉兰奖'}
-]
-
-// 年龄
-const renderAge = () => {
-  let age = [];
-  for (let i=0;i<30;i++) {
-    age.push({name: i+5, value: i+5})
-  }
-  return age;
-}
-
-// 参赛类型
-const type = [
-  {name: '舞蹈'},
-  {name: '声乐'},
-  {name: '器乐'},
-  {name: '表演'},
-  {name: '语言'},
-  {name: '书画'}
-]
 
 const errMsg1 = "不能为空或太长";
 const errMsg2 = "手机格式不正确";
@@ -48,13 +24,18 @@ const errMsg3 = "验证码不正确";
       type: 0,
       age: 5,
       cate: 0,
+      groupType: 0,
+      groupName: '',
       showName: '',
       contectPhone: '',
       lockPhone: false,
       code: '',
-      valid_Name: false,
+      valid_code: 0,
+      valid_name: false,
       valid_showName: false,
-      valid_contectPhone: false
+      valid_contectPhone: false,
+      valid_groupName: false,
+      showError: false
     }
   }
 
@@ -68,23 +49,33 @@ const errMsg3 = "验证码不正确";
 
   onSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state);
+    e.stopPropagation();
+    clearTimeout(this.timer)
+    // if (!this.state.valid_name || 
+    //   !this.state.valid_showName || 
+    //   !this.state.valid_contectPhone || 
+    //   (this.state.groupType !== 0 && !this.state.valid_groupName)) return;
 
-    // try {
-    //   const codeRes = await fetch('https://api.yingxitech.com/code/get', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       openid: this.props.openid,
-    //       phone: this.state.contectPhone
-    //     }),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   })
-    // }catch(e) {
-
+    // const codeVerify = await fetch('https://api.yingxitech.com/code/verify', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     openid: this.props.openid,
+    //     phone: this.state.contectPhone,
+    //     code: this.state.code
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // });
+    // if (!codeVerify.data) {
+    //   clearTimeout(this.timer);
+    //   console.log(this.state)
+    //   this.props.onConfirm(this.state)
+    // } else {
+    //   this.setState({showError: true});
+    //   this.timer = setTimeout(() => {this.setState({showError: false})}, 3000);
     // }
-
+    this.props.onConfirm(this.state)
   }
 
   validateName = (value) => {
@@ -92,18 +83,17 @@ const errMsg3 = "验证码不正确";
   }
 
   validatePhone = (value) => {
-    
     return validator.isMobilePhone(String(value) , 'zh-CN');
   }
 
   getStatus = (status) => {
     console.log('status', status)
-    this.setState({lockPhone: true});
+    if (status < 2) this.setState({lockPhone: true});
   }
   
   
   render () {
-    
+
     return (
       <form className="baoming-form-wrapper" onSubmit={this.onSubmit}>
         <p>{JSON.stringify(this.state)}</p>
@@ -112,10 +102,14 @@ const errMsg3 = "验证码不正确";
         <Area onChange={this.onChange.bind(this, 'area')} title="参赛地区"/>
         <Select ops={ops} onChange={this.onChange.bind(this, 'type')} title="选报大赛"/>
         <Select ops={renderAge()} onChange={this.onChange.bind(this, 'age')} title="年龄"/>
-        <Select ops={type} onChange={this.onChange.bind(this, 'cate')} title="参赛类型"/>
+        <Select ops={type} onChange={this.onChange.bind(this, 'cate')} title="节目类型"/>
         <Input title="节目名称" placeholder="填写参赛节目名称" onBlur={this.onBlur.bind(this, 'showName')} validation={this.validateName} errMsg={errMsg1}/>
         <Input title="联系电话" placeholder="填写参赛者手机号/监护人手机号" type="number" onBlur={this.onBlur.bind(this, 'contectPhone')} validation={this.validatePhone} errMsg={errMsg2} lock={this.state.lockPhone}/>
-        {this.state.valid_contectPhone && <Code getStatus={this.getStatus} onBlur={this.onBlur.bind(this, 'code')} valid={0} errMsg={errMsg3} openid={this.props.openid} phone={this.state.contectPhone}/>}
+        {this.state.valid_contectPhone && <Code getStatus={this.getStatus} onBlur={this.onBlur.bind(this, 'code')} openid={this.props.openid} phone={this.state.contectPhone}/>}
+        {this.state.showError && <span style={{color: 'red'}}>{errMsg3}</span>}
+        <Select ops={groupType} onChange={this.onChange.bind(this, 'groupType')} title="参赛单位类型"/>
+        {String(this.state.groupType) !== '0' && <Input title="参赛单位名称" placeholder="幼儿园/学校/培训机构名称" onBlur={this.onBlur.bind(this, 'groupName')} validation={this.validateName} errMsg={errMsg1}/>}
+        
         <Button/>
       </form>
     )

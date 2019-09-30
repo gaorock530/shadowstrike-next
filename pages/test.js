@@ -6,6 +6,7 @@ import apiList from '../data/jsApiList';
 import {appId} from '../data/appId.json';
 import cuid from 'cuid';
 import BaomingForm from '../components/subpage/baoming_form';
+import Confirm from '../components/subpage/confirm_page';
 
 
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
@@ -23,7 +24,8 @@ class Test extends React.PureComponent {
       status: '空',
       loggedIN: false,
       user: null,
-      api: ''
+      api: '',
+      stage: 0,
     }
   }
 
@@ -128,6 +130,15 @@ class Test extends React.PureComponent {
     }
   }
 
+  onConfirm = (formData) => {
+    console.log(formData)
+    this.formData = formData;
+    this.setState({stage: 1});
+  }
+
+  onSubmit = () => {
+    this.setState({stage: 2});
+  }
   
 
   render () {
@@ -147,15 +158,17 @@ class Test extends React.PureComponent {
 
           <div className="user-icon" style={{backgroundImage: `url('${(this.props.query && this.props.query.pic) || '/static/pic/back.jpeg'}')`}}></div>
           <h2>报名通道将在10月1日开启</h2>
-          {this.props.query && this.props.query.subscribe === '1'?null:<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>}
-          <a className="test_link" href={`/test?openid=${this.props.query.openid}&token=${this.props.query.token}`}></a>
-          
-          <p>{JSON.stringify(this.props.query)}</p>
-          <p>user: {JSON.stringify(this.state.user)}</p>
-          <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
-          <p>{this.state.status}</p>
-          <p>{JSON.stringify(this.state.api)}</p>
-          <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'}/>
+          {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
+            <div>
+              <p>{JSON.stringify(this.props.query)}</p>
+              <p>user: {JSON.stringify(this.state.user)}</p>
+              <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
+              <p>{this.state.status}</p>
+              <p>{JSON.stringify(this.state.api)}</p>
+              {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onConfirm={this.onConfirm}/>}
+              {this.state.stage === 1 && <Confirm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onSubmit} formData={this.formData}/>}
+            </div>
+          }
         </div>
       </div>
     )

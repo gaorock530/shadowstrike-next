@@ -50,7 +50,6 @@ import Input from './input';
 
   
   render () {
-    console.log(this.state.lock)
     return (
       <div className="form-component-wrapper">
         <div className="form-component form-code">

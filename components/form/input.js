@@ -7,7 +7,7 @@ class Input extends React.PureComponent {
   constructor(props) {
     super(props);
     this.type = this.props.type || 'text';
-    this.state = { valid: this.props.valid || 0, value: ''};
+    this.state = { valid: this.props.valid || 0};
   }
 
   onChange = (e) => {
@@ -18,16 +18,16 @@ class Input extends React.PureComponent {
     if (this.props.lock) return;
     this.setState({value: e.target.value});
     
-    let value, valid;
+    let valid, value = 0;
     if (this.props.validation) {
-      const res = this.props.validation(e.target.value);
-      value = res? 1: 2;
-      this.props.onBlur && this.props.onBlur(e.target.value, res);
+      valid = this.props.validation(e.target.value);
+      value = valid? 1: 2;
+      this.props.onBlur && this.props.onBlur(e.target.value, !!valid);
     } else {
       this.props.onBlur && this.props.onBlur(e.target.value);
     }
     
-    if (value && value !== this.state.valid) this.setState({valid: value});
+    if (valid !== this.state.valid) this.setState({valid: value});
   }
   
   render () {
