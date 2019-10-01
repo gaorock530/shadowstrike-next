@@ -1,9 +1,6 @@
 import React from 'react';
 import '../../styles/form.scss';
 import Button from '../form/button';
-import {appId} from '../../data/appId.json';
-import cuid from 'cuid';
-import {hex_md5} from '../../lib/md5';
 
 class Payment extends React.PureComponent {
 

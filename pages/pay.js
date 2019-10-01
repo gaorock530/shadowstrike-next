@@ -171,7 +171,7 @@ class Pay extends React.PureComponent {
           <h5>你好，{this.state.user?this.state.user.nickname: '朋友'}</h5>
           <h5>欢迎来到中原青少年艺术赛事网</h5>
 
-          <div className="user-icon" style={{backgroundImage: `url(\'${this.state.user?this.state.user.pic:'/static/pic/back.jpeg'}\')`}}></div>
+          <div className="user-icon" style={{backgroundImage: `url(\'${this.state.user?this.state.user.pic:''}\')`}}></div>
           {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
               {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onConfirm={this.onConfirm}/>}
@@ -211,7 +211,7 @@ async function getConfig () {
     return JSON.stringify({type: 'request error', error: e});
   }
   wx.config({
-    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId, // 必填，公众号的唯一标识
     timestamp, // 必填，生成签名的时间戳
     nonceStr: noncestr, // 必填，生成签名的随机串
