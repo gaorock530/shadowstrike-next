@@ -27,9 +27,9 @@ class BsLogin extends React.PureComponent {
         id:"qr_code", 
         appid: "wxb751a892b92c78f8", 
         scope: "snsapi_login", 
-        redirect_uri: encodeURI(`https://api.yingxitech.com/wxlogin`),
+        redirect_uri: encodeURI(`https://api.yingxitech.com/authlogin/webpage`),
         state: "login",
-        style: "black",
+        style: "white",
       });
     }catch(e) {
       console.log(e)
