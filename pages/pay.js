@@ -14,7 +14,7 @@ import Status from '../components/subpage/status';
 
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
 const page = {
-  pageTitle: '大赛报名通道'',
+  pageTitle: '大赛报名通道',
   shareTitle: '报名通道',
   shareDesc: '中原青少年艺术赛事网，报名通道即将开启',
   shareLink: 'https://yingxitech.com/pay'
