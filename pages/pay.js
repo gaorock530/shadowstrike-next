@@ -14,10 +14,10 @@ import Status from '../components/subpage/status';
 
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
 const page = {
-  pageTitle: '测试页面',
+  pageTitle: '大赛报名通道'',
   shareTitle: '报名通道',
   shareDesc: '中原青少年艺术赛事网，报名通道即将开启',
-  shareLink: 'https://yingxitech.com/test'
+  shareLink: 'https://yingxitech.com/pay'
 }
 
 class Pay extends React.PureComponent {
@@ -157,7 +157,7 @@ class Pay extends React.PureComponent {
   
 
   render () {
-    if(!this.props.query.openid || this.props.query.openid === 'undefined') return <NotWeiXin/>
+    if(!this.props.query.openid || this.props.query.openid === 'undefined' || this.props.query.subscribe === '0') return <NotWeiXin/>
 
     return (
       <div className="baoming_body">

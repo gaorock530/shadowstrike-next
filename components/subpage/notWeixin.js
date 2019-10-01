@@ -8,7 +8,7 @@ export default () => {
     <div className="form-component-wrapper notweixin">
       <Meta/>
       <Head>
-          <title>报名通道</title>
+          <title>大赛报名通道</title>
       </Head>
       <h2>欢迎来到中原青少年艺术赛事网</h2>
 
