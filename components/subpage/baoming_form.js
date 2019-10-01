@@ -97,7 +97,6 @@ const errMsg3 = "验证码不正确";
 
     return (
       <form className="baoming-form-wrapper" onSubmit={this.onSubmit}>
-        <p>{JSON.stringify(this.state)}</p>
         <Input title="姓名" placeholder="参赛者姓名" onBlur={this.onBlur.bind(this, 'name')} validation={this.validateName} errMsg={errMsg1}/>
         <Select ops={[{name:'男', value: 0}, {name:'女', value: 1}]} onChange={this.onChange.bind(this, 'sex')} title="性别"/>
         <Area onChange={this.onChange.bind(this, 'area')} title="参赛地区"/>
