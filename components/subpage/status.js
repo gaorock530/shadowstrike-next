@@ -3,7 +3,7 @@ import '../../styles/form.scss';
 import Head from 'next/head'
 import {ops, type, groupType} from '../../lib/formData';
 
-export default ({statusData}) => {
+export default ({statusData, onSubmit}) => {
 
   const data = [
     {t: '姓名', v: statusData.baoming_name},
@@ -26,11 +26,11 @@ export default ({statusData}) => {
       headers: {'Content-Type': 'application/json'}
     })
     const prepayJson = await prepay.json();
-    if (prepayJson.err) return this.props.onSubmit(prepayJson.err);
+    if (prepayJson.err) return onSubmit(prepayJson.err);
 
 
     const success = (res) => {
-      this.props.onSubmit('支付成功');
+      onSubmit('支付成功');
     }
 
     prepayJson['success'] = success;
