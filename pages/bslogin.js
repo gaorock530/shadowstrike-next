@@ -23,7 +23,7 @@ class BsLogin extends React.PureComponent {
     
     try {
       var obj = new WxLogin({
-        self_redirect:true,
+        self_redirect:false,
         id:"qr_code", 
         appid: "wxb751a892b92c78f8", 
         scope: "snsapi_login", 
