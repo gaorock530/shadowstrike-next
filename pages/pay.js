@@ -104,7 +104,7 @@ class Pay extends React.PureComponent {
       user = await response.json();
       console.log(user)
 
-      this.setState({user: !user.user, loggedIN: !user.user});
+      this.setState({user, loggedIN: user.openid});
       if (user.token) window.localStorage.setItem('token', user.token);
     } else {
       console.log('not from Weixin!!!')
@@ -168,10 +168,10 @@ class Pay extends React.PureComponent {
         </Head>
         <div className="relative_body padding-size">
 
-          <h5>你好，{this.props.query?this.props.query.nickname: '朋友'}</h5>
+          <h5>你好，{this.state.user?this.state.user.nickname: '朋友'}</h5>
           <h5>欢迎来到中原青少年艺术赛事网</h5>
 
-          <div className="user-icon" style={{backgroundImage: `url('${(this.props.query && this.props.query.pic) || '/static/pic/back.jpeg'}')`}}></div>
+          <div className="user-icon" style={{backgroundImage: `url(\'${this.state.user?this.state.user.pic:'/static/pic/back.jpeg'}\')`}}></div>
           {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
               {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onConfirm={this.onConfirm}/>}
