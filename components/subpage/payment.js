@@ -19,7 +19,7 @@ class Payment extends React.PureComponent {
     console.log(prepayJson)
 
     const success = (res) => {
-      this.props.onSubmit('支付成功:'+res);
+      this.props.onSubmit('支付成功');
     }
 
     prepayJson['success'] = success;

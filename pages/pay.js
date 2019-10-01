@@ -9,6 +9,7 @@ import BaomingForm from '../components/subpage/baoming_form';
 import Confirm from '../components/subpage/confirm_page';
 import Payment from '../components/subpage/payment';
 import NotWeiXin from '../components/subpage/notWeixin';
+import Status from '../components/subpage/status';
 
 
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
@@ -23,11 +24,11 @@ class Pay extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      status: '空',
+      status: '',
       loggedIN: false,
       user: null,
       api: '',
-      stage: 2,
+      stage: 0,
     }
   }
 
@@ -37,6 +38,20 @@ class Pay extends React.PureComponent {
   }
 
   async componentDidMount() {
+
+    // confirm if already has a race
+    const raceStatus = await fetch('https://api.yingxitech.com/baoming/verify', {
+      method: 'POST',
+      body: JSON.stringify({openid: this.props.query.openid}),
+      headers: {'Content-Type': 'application/json'}
+    });
+
+    this.raceJson = await raceStatus.json();
+
+    if (!this.raceJson.err) this.setState({stage: 4});
+
+
+
     // check is New USER with Token
     let user, response;
     if (this.props.query.token && this.props.query.token !== 'undefined') {
@@ -96,8 +111,7 @@ class Pay extends React.PureComponent {
     }
 
     try {
-      const res = await getConfig();
-      console.log('config', res);
+      await getConfig();
       wx.ready(function(){
         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
         wx.updateAppMessageShareData({ 
@@ -107,7 +121,6 @@ class Pay extends React.PureComponent {
           imgUrl: icon_url, // 分享图标
           success: function () {
             // 设置成功
-            this.setState({status: 'updateAppMessageShareData ok'});
           }
         });
         wx.updateTimelineShareData({ 
@@ -116,18 +129,14 @@ class Pay extends React.PureComponent {
           imgUrl: icon_url, // 分享图标
           success: function () {
             // 设置成功
-            this.setState({status: 'updateTimelineShareData ok'});
           }
         })
       });
       wx.error(function(res){
         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-        this.setState({status: JSON.stringify({type: 'config error', error: res})});
       });
     }catch(e) {
       console.log(e)
-      this.setState({status: JSON.stringify({type: 'setup error', error: e})});
-      
     }
   }
 
@@ -165,15 +174,11 @@ class Pay extends React.PureComponent {
           <div className="user-icon" style={{backgroundImage: `url('${(this.props.query && this.props.query.pic) || '/static/pic/back.jpeg'}')`}}></div>
           {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
-              {/* <p>{JSON.stringify(this.props.query)}</p>
-              <p>user: {JSON.stringify(this.state.user)}</p>
-              <p>是否已登录：{this.state.loggedIN? '是': '否'}</p>
-              <p>{this.state.status}</p>
-              <p>{JSON.stringify(this.state.api)}</p> */}
               {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onConfirm={this.onConfirm}/>}
               {this.state.stage === 1 && <Confirm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onSubmit} formData={this.formData}/>}
               {this.state.stage === 2 && <Payment openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onAfterPay}/>}
-              {this.state.stage === 3 && <div>after pay: {this.state.status}</div>}
+              {this.state.stage === 3 && <div>{this.state.status}</div>}
+              {this.state.stage === 4 && <Status {...this.raceJson}/>}
             </div>
           }
         </div>
@@ -202,12 +207,11 @@ async function getConfig () {
       }
     });
     data = await res.json();
-    console.log(data);
   }catch(e) {
     return JSON.stringify({type: 'request error', error: e});
   }
   wx.config({
-    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId, // 必填，公众号的唯一标识
     timestamp, // 必填，生成签名的时间戳
     nonceStr: noncestr, // 必填，生成签名的随机串
