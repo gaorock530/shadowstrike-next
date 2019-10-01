@@ -38,7 +38,7 @@ export default ({statusData}) => {
 
     wx.chooseWXPay(prepayJson);
   }
-  
+
   const renderTable = (arr) => arr.map((a, index) => <tr key={index}><th>{a.t}:</th><td>{a.v}</td></tr>)
 
   return (
@@ -54,7 +54,7 @@ export default ({statusData}) => {
           </tbody>
         </table>
       </div>
-      <div className="form-pay-wrapper"><button onClick={pay}>支付确认</button></div>
+      {!statusData.bisai_paid && <div className="form-pay-wrapper"><button onClick={pay}>支付确认</button></div>}
       
     </div>
   )
