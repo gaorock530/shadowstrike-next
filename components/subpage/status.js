@@ -19,7 +19,28 @@ export default ({statusData}) => {
     {t: '报名状态', v: '已报名'},
     {t: '缴费状态',v: statusData.bisai_paid?'已支付':'未支付'}
   ];
-
+  const pay = () => {
+    async () => {
+      const prepay = await fetch('https://api.yingxitech.com/pay/request', {
+        method: 'POST',
+        body: JSON.stringify({openid: this.props.openid}),
+        headers: {'Content-Type': 'application/json'}
+      })
+      const prepayJson = await prepay.json();
+      if (prepayJson.err) return this.props.onSubmit(prepayJson.err);
+  
+      console.log(prepayJson)
+  
+      const success = (res) => {
+        this.props.onSubmit('支付成功');
+      }
+  
+      prepayJson['success'] = success;
+      delete prepayJson['appId'];
+  
+      wx.chooseWXPay(prepayJson);
+    }
+  }
   const renderTable = (arr) => arr.map((a, index) => <tr key={index}><th>{a.t}:</th><td>{a.v}</td></tr>)
 
   return (
@@ -28,12 +49,15 @@ export default ({statusData}) => {
           <title>报名状态</title>
       </Head>
       <h2>您已经报名成功</h2>
-
-      <table>
-        <tbody>
-        {renderTable(data)}
-        </tbody>
-      </table>
+      <div className="form-confirm-wrapper">
+        <table>
+          <tbody>
+          {renderTable(data)}
+          </tbody>
+        </table>
+      </div>
+      <div className="form-pay-wrapper"><button onClick={pay}>支付确认</button></div>
+      
     </div>
   )
 };

@@ -28,7 +28,7 @@ class Pay extends React.PureComponent {
       loggedIN: false,
       user: null,
       api: '',
-      stage: 0,
+      stage: 4,
     }
   }
 

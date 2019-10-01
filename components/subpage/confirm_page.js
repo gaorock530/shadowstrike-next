@@ -65,6 +65,7 @@ class Comfirm extends React.PureComponent {
          </tbody>
         </table>}
         <div className="form-component-wrapper">
+          <h6>*请认真检查参赛信息，提交后不得修改！</h6>
           <div className="form-component">
             <button onClick={this.baoming} disabled={!formData}>确认报名</button>
           </div>
