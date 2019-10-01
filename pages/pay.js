@@ -28,7 +28,7 @@ class Pay extends React.PureComponent {
       loggedIN: false,
       user: null,
       api: '',
-      stage: 4,
+      stage: 0,
     }
   }
 
@@ -178,7 +178,7 @@ class Pay extends React.PureComponent {
               {this.state.stage === 1 && <Confirm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onSubmit} formData={this.formData}/>}
               {this.state.stage === 2 && <Payment openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onAfterPay}/>}
               {this.state.stage === 3 && <div>{this.state.status}</div>}
-              {this.state.stage === 4 && <Status statusData={this.raceJson}/>}
+              {this.state.stage === 4 && <Status statusData={this.raceJson} onSubmit={this.onAfterPay}/>}
             </div>
           }
         </div>

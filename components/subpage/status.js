@@ -23,13 +23,12 @@ export default ({statusData}) => {
     async () => {
       const prepay = await fetch('https://api.yingxitech.com/pay/request', {
         method: 'POST',
-        body: JSON.stringify({openid: this.props.openid}),
+        body: JSON.stringify({openid: statusData.openid}),
         headers: {'Content-Type': 'application/json'}
       })
       const prepayJson = await prepay.json();
       if (prepayJson.err) return this.props.onSubmit(prepayJson.err);
-  
-      console.log(prepayJson)
+
   
       const success = (res) => {
         this.props.onSubmit('支付成功');
