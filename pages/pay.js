@@ -28,6 +28,9 @@ class Pay extends React.PureComponent {
       user: null,
       api: '',
       stage: 0,
+      nickname: '朋友',
+      pic: '',
+      unionid: ''
     }
   }
 
@@ -49,7 +52,12 @@ class Pay extends React.PureComponent {
 
     this.raceJson = await raceStatus.json();
 
-    if (!this.raceJson.err) return this.setState({stage: 4});
+    if (!this.raceJson.err) {
+      this.setState({nickname: user.nickname,
+        pic: user.pic,
+        unionid: user.unionid});
+      return this.setState({stage: 4});
+    }
 
 
 
@@ -68,7 +76,9 @@ class Pay extends React.PureComponent {
     if (response.ok) {
       user = await response.json();
       console.log(user)
-      this.setState({user});
+      this.setState({nickname: user.nickname,
+      pic: user.pic,
+      unionid: user.unionid});
     } else {
       console.log('not from Weixin!!!')
     }
@@ -134,10 +144,10 @@ class Pay extends React.PureComponent {
         </Head>
         <div className="relative_body padding-size">
 
-          <h5>你好，{this.state.user?this.state.user.nickname: '朋友'}</h5>
+          <h5>你好，{this.state.nickname}</h5>
           <h5>欢迎来到中原青少年艺术赛事网</h5>
 
-          <div className="user-icon" style={{backgroundImage: `url(\'${this.state.user?this.state.user.pic:''}\')`}}></div>
+          <div className="user-icon" style={{backgroundImage: `url(\'${this.state.pic}\')`}}></div>
           {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
               {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid} onConfirm={this.onConfirm}/>}
