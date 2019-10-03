@@ -41,7 +41,7 @@ class Pay extends React.PureComponent {
     // confirm if already has a race
     const raceStatus = await fetch('https://api.yingxitech.com/baoming/verify', {
       method: 'POST',
-      body: JSON.stringify({openid: this.props.query.openid}),
+      body: JSON.stringify({unionid: this.props.query.openid}),
       headers: {'Content-Type': 'application/json'}
     });
 

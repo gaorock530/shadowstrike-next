@@ -22,7 +22,7 @@ export default ({statusData, onSubmit}) => {
   const pay = async () => {
     const prepay = await fetch('https://api.yingxitech.com/pay/request', {
       method: 'POST',
-      body: JSON.stringify({openid: statusData.openid}),
+      body: JSON.stringify({unionid: statusData.openid}),
       headers: {'Content-Type': 'application/json'}
     })
     const prepayJson = await prepay.json();
