@@ -131,7 +131,7 @@ class Pay extends React.PureComponent {
   
 
   render () {
-    if(!this.props.query.openid || this.props.query.openid === 'undefined' || this.props.query.subscribe === '0') return <NotWeiXin/>
+    if(!this.props.query.unionid || this.props.query.unionid === 'undefined' || this.props.query.subscribe === '0') return <NotWeiXin/>
 
     return (
       <div className="baoming_body">
