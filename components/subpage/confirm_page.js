@@ -11,7 +11,7 @@ class Comfirm extends React.PureComponent {
       const baomingRes = await fetch('https://api.yingxitech.com/baoming', {
         method: 'POST',
         body: JSON.stringify({
-          openid: this.props.openid,
+          unionid: this.props.openid,
           name: this.props.formData.name,
           sex: this.props.formData.sex,
           age: this.props.formData.age,

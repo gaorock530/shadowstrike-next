@@ -11,7 +11,6 @@ import Payment from '../components/subpage/payment';
 import NotWeiXin from '../components/subpage/notWeixin';
 import Status from '../components/subpage/status';
 
-
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
 const page = {
   pageTitle: '大赛报名通道',
