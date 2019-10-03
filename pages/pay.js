@@ -53,9 +53,9 @@ class Pay extends React.PureComponent {
     this.raceJson = await raceStatus.json();
 
     if (!this.raceJson.err) {
-      this.setState({nickname: user.nickname,
-        pic: user.pic,
-        unionid: user.unionid});
+      this.setState({nickname: this.raceJson.nickname,
+        pic: this.raceJson.pic,
+        unionid: this.raceJson.unionid});
       return this.setState({stage: 4});
     }
 
