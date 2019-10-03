@@ -58,7 +58,7 @@ const errMsg3 = "验证码不正确";
     const codeVerify = await fetch('https://api.yingxitech.com/code/verify', {
       method: 'POST',
       body: JSON.stringify({
-        unionid: this.props.openid,
+        unionid: this.props.unionid,
         phone: this.state.contectPhone,
         code: this.state.code
       }),
