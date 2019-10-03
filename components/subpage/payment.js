@@ -1,13 +1,12 @@
 import React from 'react';
 import '../../styles/form.scss';
-import Button from '../form/button';
 
 class Payment extends React.PureComponent {
 
   pay = async () => {
     const prepay = await fetch('https://api.yingxitech.com/pay/request', {
       method: 'POST',
-      body: JSON.stringify({openid: this.props.openid}),
+      body: JSON.stringify({unionid: this.props.openid}),
       headers: {'Content-Type': 'application/json'}
     })
     const prepayJson = await prepay.json();

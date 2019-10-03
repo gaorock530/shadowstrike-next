@@ -58,7 +58,7 @@ class Pay extends React.PureComponent {
 
       response = await fetch('https://api.yingxitech.com/user', {
         method: 'POST',
-        body: JSON.stringify({openid: this.props.query.openid}),
+        body: JSON.stringify({unionid: this.props.query.openid}),
         headers: {
           'Content-Type': 'application/json'
         }
