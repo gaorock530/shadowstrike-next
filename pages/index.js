@@ -14,7 +14,7 @@ const Home = () => (
     <Meta/>
     <Head>
       <title>影袭科技</title>
-      <meta name="description" content="影袭网络技术有限公司 影袭 影袭科技 影袭网络 shadow strike 网络 PWA SPA 去中心化网络 http2"/>
+      <meta name="description" content="影袭科技专注于网站建设、微信开发、小程序开发、微信运营托管、并有朋友圈广告、数字营销等全新服务内容让企业微信不止有关注度，更有内容精度。我们的核心技术引擎，面向地产、汽车出行、家电家装、金融等行业，提供软件开发、APP开发等解决方案。"/>
       <meta name="keywords" content="影袭网络技术有限公司 影袭 影袭科技 影袭网络 shadow strike 网络 PWA SPA 去中心化网络 http2" />
     </Head>
 
@@ -34,7 +34,7 @@ const Home = () => (
         <div className="back-content">
           <h1>Professional Website Build</h1>
           <h1>专业网站建设</h1>
-          <p>网站建设、微信开发、小程序开发、微信运营托管、并有朋友圈广告、数字营销等全新服务内容让企业微信不止有关注度，更有内容精度</p>
+          <p>影袭科技专注于网站建设、微信开发、小程序开发、微信运营托管、并有朋友圈广告、数字营销等全新服务内容让企业微信不止有关注度，更有内容精度。</p>
           <p>我们的核心技术引擎，面向地产、汽车出行、家电家装、金融等行业，提供软件开发、APP开发等解决方案。</p>
           <button>预付订金</button>
         </div>
