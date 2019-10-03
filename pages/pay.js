@@ -38,6 +38,8 @@ class Pay extends React.PureComponent {
 
   async componentDidMount() {
 
+    if (!this.props.query.openid || this.props.query.openid === 'undefined') return;
+
     // confirm if already has a race
     const raceStatus = await fetch('https://api.yingxitech.com/baoming/verify', {
       method: 'POST',
@@ -47,67 +49,32 @@ class Pay extends React.PureComponent {
 
     this.raceJson = await raceStatus.json();
 
-    if (!this.raceJson.err) this.setState({stage: 4});
+    if (!this.raceJson.err) return this.setState({stage: 4});
 
 
 
     // check is New USER with Token
     let user, response;
-    if (this.props.query.token && this.props.query.token !== 'undefined') {
-      window.localStorage.setItem('token', this.props.query.token);
 
-      response = await fetch('https://api.yingxitech.com/user', {
-        method: 'POST',
-        body: JSON.stringify({unionid: this.props.query.openid}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (response.ok) console.log('api: /user');
-      
-
-    } else {
-
-      if (!this.props.query.openid || this.props.query.openid === 'undefined') return; // !!!! Not Weixin access, Need spacial handle !!!!
-      // check if already logged in
-      const token = window.localStorage? window.localStorage.getItem('token'): null;
-      
-
-      if (token && token !== 'undefined') {
-
-        response = await fetch('https://api.yingxitech.com/login', {
-          method: 'POST',
-          body: JSON.stringify({token}),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-
-      } else {
-        window.localStorage.removeItem('token');
-
-        response = await fetch('https://api.yingxitech.com/login', {
-          method: 'POST',
-          body: JSON.stringify({
-            openid: this.props.query.openid
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+    response = await fetch('https://api.yingxitech.com/user', {
+      method: 'POST',
+      body: JSON.stringify({unionid: this.props.query.openid}),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    }
+    });
+      
+
     if (response.ok) {
       user = await response.json();
       console.log(user)
-
-      this.setState({user, loggedIN: user.openid});
-      if (user.token) window.localStorage.setItem('token', user.token);
+      this.setState({user});
     } else {
       console.log('not from Weixin!!!')
     }
+
+    
+    
 
     try {
       await getConfig();
@@ -173,9 +140,9 @@ class Pay extends React.PureComponent {
           <div className="user-icon" style={{backgroundImage: `url(\'${this.state.user?this.state.user.pic:''}\')`}}></div>
           {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
-              {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onConfirm={this.onConfirm}/>}
-              {this.state.stage === 1 && <Confirm openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onSubmit} formData={this.formData}/>}
-              {this.state.stage === 2 && <Payment openid={this.props.query.openid || 'oGCPOwwKLIZNVOa8TOqUOsdbDpLs'} onSubmit={this.onAfterPay}/>}
+              {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid} onConfirm={this.onConfirm}/>}
+              {this.state.stage === 1 && <Confirm openid={this.props.query.openid} onSubmit={this.onSubmit} formData={this.formData}/>}
+              {this.state.stage === 2 && <Payment openid={this.props.query.openid} onSubmit={this.onAfterPay}/>}
               {this.state.stage === 3 && <div>{this.state.status}</div>}
               {this.state.stage === 4 && <Status statusData={this.raceJson} onSubmit={this.onAfterPay}/>}
             </div>
