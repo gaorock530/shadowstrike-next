@@ -46,7 +46,7 @@ class Pay extends React.PureComponent {
     // confirm if already has a race
     const raceStatus = await fetch('https://api.yingxitech.com/baoming/verify', {
       method: 'POST',
-      body: JSON.stringify({unionid: this.props.query.openid}),
+      body: JSON.stringify({unionid: this.props.query.unionid}),
       headers: {'Content-Type': 'application/json'}
     });
 
@@ -66,22 +66,18 @@ class Pay extends React.PureComponent {
 
     response = await fetch('https://api.yingxitech.com/user', {
       method: 'POST',
-      body: JSON.stringify({unionid: this.props.query.openid}),
+      body: JSON.stringify({unionid: this.props.query.unionid}),
       headers: {
         'Content-Type': 'application/json'
       }
     });
       
 
-    if (response.ok) {
-      user = await response.json();
-      console.log(user)
-      this.setState({nickname: user.nickname,
-      pic: user.pic,
-      unionid: user.unionid});
-    } else {
-      console.log('not from Weixin!!!')
-    }
+    user = await response.json();
+    console.log(user)
+    this.setState({nickname: user.nickname,
+    pic: user.pic,
+    unionid: user.unionid});
 
     
     
@@ -150,9 +146,9 @@ class Pay extends React.PureComponent {
           <div className="user-icon" style={{backgroundImage: `url(\'${this.state.pic}\')`}}></div>
           {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
-              {this.state.stage === 0 && <BaomingForm openid={this.props.query.openid} onConfirm={this.onConfirm}/>}
-              {this.state.stage === 1 && <Confirm openid={this.props.query.openid} onSubmit={this.onSubmit} formData={this.formData}/>}
-              {this.state.stage === 2 && <Payment openid={this.props.query.openid} onSubmit={this.onAfterPay}/>}
+              {this.state.stage === 0 && <BaomingForm unionid={this.props.query.unionid} onConfirm={this.onConfirm}/>}
+              {this.state.stage === 1 && <Confirm unionid={this.props.query.unionid} onSubmit={this.onSubmit} formData={this.formData}/>}
+              {this.state.stage === 2 && <Payment unionid={this.props.query.unionid} onSubmit={this.onAfterPay}/>}
               {this.state.stage === 3 && <div>{this.state.status}</div>}
               {this.state.stage === 4 && <Status statusData={this.raceJson} onSubmit={this.onAfterPay}/>}
             </div>

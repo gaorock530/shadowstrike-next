@@ -6,7 +6,7 @@ class Payment extends React.PureComponent {
   pay = async () => {
     const prepay = await fetch('https://api.yingxitech.com/pay/request', {
       method: 'POST',
-      body: JSON.stringify({unionid: this.props.openid}),
+      body: JSON.stringify({unionid: this.props.unionid}),
       headers: {'Content-Type': 'application/json'}
     })
     const prepayJson = await prepay.json();

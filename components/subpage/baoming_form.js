@@ -105,7 +105,7 @@ const errMsg3 = "验证码不正确";
         <Select ops={type} onChange={this.onChange.bind(this, 'cate')} title="节目类型"/>
         <Input title="节目名称" placeholder="填写参赛节目名称" onBlur={this.onBlur.bind(this, 'showName')} validation={this.validateName} errMsg={errMsg1}/>
         <Input title="联系电话" placeholder="填写参赛者手机号/监护人手机号" type="number" onBlur={this.onBlur.bind(this, 'contectPhone')} validation={this.validatePhone} errMsg={errMsg2} lock={this.state.lockPhone}/>
-        {this.state.valid_contectPhone && <Code getStatus={this.getStatus} onBlur={this.onBlur.bind(this, 'code')} openid={this.props.openid} phone={this.state.contectPhone}/>}
+        {this.state.valid_contectPhone && <Code getStatus={this.getStatus} onBlur={this.onBlur.bind(this, 'code')} unionid={this.props.unionid} phone={this.state.contectPhone}/>}
         {this.state.showError && <span style={{color: 'red'}}>{errMsg3}</span>}
         <Select ops={groupType} onChange={this.onChange.bind(this, 'groupType')} title="参赛单位类型"/>
         {String(this.state.groupType) !== '0' && <Input title="参赛单位名称" placeholder="幼儿园/学校/培训机构名称" onBlur={this.onBlur.bind(this, 'groupName')} validation={this.validateName} errMsg={errMsg1}/>}

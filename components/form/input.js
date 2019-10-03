@@ -38,7 +38,7 @@ class Input extends React.PureComponent {
         {this.props.title && <h3>{this.props.title}:</h3>}
         <div className="form-component">
           {this.state.valid !==0 ? <FontAwesomeIcon icon={this.state.valid === 1?faCheck:faTimes} className={'form-icon' + name}/>: null}
-          <input onBlur={this.onBlur} type={this.type} placeholder={this.props.placeholder} readOnly={this.props.lock} onChange={this.onChange} className={this.props.lock?'form-lock':null}/>
+          <input onBlur={this.onBlur} type={this.type} placeholder={this.props.placeholder} readOnly={this.props.lock} onChange={this.onChange} className={this.props.lock?'form-lock':null} maxlength={this.props.max || null}/>
         </div>
         {(this.state.valid === 2 && this.props.errMsg) && <div className="form-error-msg"><p>{this.props.errMsg}</p></div>}
       </div>
