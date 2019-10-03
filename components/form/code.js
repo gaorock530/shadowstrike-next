@@ -30,7 +30,7 @@ import Input from './input';
       const codeRes = await fetch('https://api.yingxitech.com/code/get', {
         method: 'POST',
         body: JSON.stringify({
-          openid: this.props.openid,
+          unionid: this.props.openid,
           phone: this.props.phone
         }),
         headers: {
