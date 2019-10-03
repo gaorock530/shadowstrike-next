@@ -41,7 +41,7 @@ class Pay extends React.PureComponent {
 
   async componentDidMount() {
 
-    if (!this.props.query.openid || this.props.query.openid === 'undefined') return;
+    if (!this.props.query.unionid || this.props.query.unionid === 'undefined') return;
 
     // confirm if already has a race
     const raceStatus = await fetch('https://api.yingxitech.com/baoming/verify', {
@@ -56,28 +56,30 @@ class Pay extends React.PureComponent {
       this.setState({nickname: this.raceJson.nickname,
         pic: this.raceJson.pic,
         unionid: this.raceJson.unionid});
-      return this.setState({stage: 4});
+      this.setState({stage: 4});
+    } else {
+      // check is New USER with Token
+      let user, response;
+
+      response = await fetch('https://api.yingxitech.com/user', {
+        method: 'POST',
+        body: JSON.stringify({unionid: this.props.query.unionid}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+        
+
+      user = await response.json();
+      console.log(user)
+      this.setState({nickname: user.nickname,
+      pic: user.pic,
+      unionid: user.unionid});
     }
 
 
 
-    // check is New USER with Token
-    let user, response;
-
-    response = await fetch('https://api.yingxitech.com/user', {
-      method: 'POST',
-      body: JSON.stringify({unionid: this.props.query.unionid}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-      
-
-    user = await response.json();
-    console.log(user)
-    this.setState({nickname: user.nickname,
-    pic: user.pic,
-    unionid: user.unionid});
+    
 
     
     
