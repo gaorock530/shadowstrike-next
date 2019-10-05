@@ -4,29 +4,29 @@ import wxpay from '../../lib/pay';
 
 class Payment extends React.PureComponent {
 
-  // pay = async () => {
-  //   const prepay = await fetch('https://api.yingxitech.com/pay/request', {
-  //     method: 'POST',
-  //     body: JSON.stringify({unionid: this.props.unionid}),
-  //     headers: {'Content-Type': 'application/json'}
-  //   })
-  //   const prepayJson = await prepay.json();
-  //   if (prepayJson.err) return this.props.onSubmit(prepayJson.err);
-
-  //   console.log(prepayJson)
-
-  //   prepayJson['success'] = (res) => {
-  //     this.props.onSubmit('支付成功');
-      
-  //   };
-  //   delete prepayJson['appId'];
-
-  //   wx.chooseWXPay(prepayJson);
-  // }
-
   pay = async () => {
-    await wxpay(this.props.unionid, this.props.onSubmit);
+    const prepay = await fetch('https://api.yingxitech.com/pay/request', {
+      method: 'POST',
+      body: JSON.stringify({unionid: this.props.unionid}),
+      headers: {'Content-Type': 'application/json'}
+    })
+    const prepayJson = await prepay.json();
+    if (prepayJson.err) return this.props.onSubmit(prepayJson.err);
+
+    console.log(prepayJson)
+
+    prepayJson['success'] = (res) => {
+      this.props.onSubmit('支付成功');
+      
+    };
+    delete prepayJson['appId'];
+
+    wx.chooseWXPay(prepayJson);
   }
+
+  // pay = async () => {
+  //   await wxpay(this.props.unionid, this.props.onSubmit);
+  // }
 
 
   render () {
