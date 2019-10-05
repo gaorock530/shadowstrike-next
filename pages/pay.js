@@ -93,7 +93,7 @@ class Pay extends React.PureComponent {
           desc: page.shareDesc, // 分享描述
           link: page.shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: icon_url, // 分享图标
-          success: function () {
+          success: async function () {
             // 设置成功
             try {
               await fetch(`https://api.yingxitech.com/share?uri=${page.shareLink}&id=${this.state.unionid}&type=friend`);
@@ -106,7 +106,7 @@ class Pay extends React.PureComponent {
           title: page.shareTitle, // 分享标题
           link: page.shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: icon_url, // 分享图标
-          success: function () {
+          success: async function () {
             // 设置成功
             try {
               await fetch(`https://api.yingxitech.com/share?uri=${page.shareLink}&id=${this.state.unionid}&type=circle`);
