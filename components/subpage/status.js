@@ -21,7 +21,7 @@ export default ({statusData, onSubmit}) => {
   ];
 
   const pay = async () => {
-    await wxpay(wx, statusData.unionid, onSubmit);
+    await wxpay(statusData.unionid, onSubmit);
   }
   // const pay = async () => {
   //   const prepay = await fetch('https://api.yingxitech.com/pay/request', {

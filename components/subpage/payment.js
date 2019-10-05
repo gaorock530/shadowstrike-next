@@ -25,7 +25,7 @@ class Payment extends React.PureComponent {
   // }
 
   pay = async () => {
-    await wxpay(wx, this.props.unionid, this.props.onSubmit);
+    await wxpay(this.props.unionid, this.props.onSubmit);
   }
 
 
