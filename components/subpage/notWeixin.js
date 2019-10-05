@@ -9,6 +9,7 @@ export default () => {
       <Meta/>
       <Head>
           <title>大赛报名通道</title>
+          <script src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
       </Head>
       <h2>欢迎来到中原青少年艺术赛事网</h2>
 
