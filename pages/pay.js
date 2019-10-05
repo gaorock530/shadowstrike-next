@@ -93,15 +93,26 @@ class Pay extends React.PureComponent {
           desc: page.shareDesc, // 分享描述
           link: page.shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: icon_url, // 分享图标
-          success: async function () {
+          success: async () => {
+            alert('分享成功')
             // 设置成功
             try {
-              await fetch(`https://api.yingxitech.com/share?uri=${page.shareLink}&id=${this.state.unionid}&type=friend`);
+              await fetch('https://api.yingxitech.com/share', {
+                body: JSON.stringify({
+                  uri: page.shareLink,
+                  id: this.state.unionid,
+                  type: 'friend'
+                }),
+                headers: {'Content-Type': 'application/json'}
+              });
             }catch(e) {
 
             } 
+          },
+          cancel: () => {
+            alert('分享失败')
           }
-        });
+        }, () => {alert('分享完成')});
         wx.updateTimelineShareData({ 
           title: page.shareTitle, // 分享标题
           link: page.shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
@@ -109,7 +120,14 @@ class Pay extends React.PureComponent {
           success: async function () {
             // 设置成功
             try {
-              await fetch(`https://api.yingxitech.com/share?uri=${page.shareLink}&id=${this.state.unionid}&type=circle`);
+              await fetch('https://api.yingxitech.com/share', {
+                body: JSON.stringify({
+                  uri: page.shareLink,
+                  id: this.state.unionid,
+                  type: 'circle'
+                }),
+                headers: {'Content-Type': 'application/json'}
+              });
             }catch(e) {
 
             } 
