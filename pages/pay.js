@@ -95,6 +95,11 @@ class Pay extends React.PureComponent {
           imgUrl: icon_url, // 分享图标
           success: function () {
             // 设置成功
+            try {
+              await fetch(`https://api.yingxitech.com/share?uri=${page.shareLink}&id=${this.state.unionid}&type=friend`);
+            }catch(e) {
+
+            } 
           }
         });
         wx.updateTimelineShareData({ 
@@ -103,6 +108,11 @@ class Pay extends React.PureComponent {
           imgUrl: icon_url, // 分享图标
           success: function () {
             // 设置成功
+            try {
+              await fetch(`https://api.yingxitech.com/share?uri=${page.shareLink}&id=${this.state.unionid}&type=circle`);
+            }catch(e) {
+
+            } 
           }
         })
       });

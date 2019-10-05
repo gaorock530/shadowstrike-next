@@ -19,25 +19,29 @@ export default ({statusData, onSubmit}) => {
     {t: '报名状态', v: '已报名'},
     {t: '缴费状态',v: statusData.bisai_paid?'已支付':'未支付'}
   ];
+
   const pay = async () => {
-    const prepay = await fetch('https://api.yingxitech.com/pay/request', {
-      method: 'POST',
-      body: JSON.stringify({unionid: statusData.unionid}),
-      headers: {'Content-Type': 'application/json'}
-    })
-    const prepayJson = await prepay.json();
-    if (prepayJson.err) return onSubmit(prepayJson.err);
-
-
-    const success = (res) => {
-      onSubmit('支付成功');
-    }
-
-    prepayJson['success'] = success;
-    delete prepayJson['appId'];
-
-    wx.chooseWXPay(prepayJson);
+    await wxpay(wx, statusData.unionid, onSubmit);
   }
+  // const pay = async () => {
+  //   const prepay = await fetch('https://api.yingxitech.com/pay/request', {
+  //     method: 'POST',
+  //     body: JSON.stringify({unionid: statusData.unionid}),
+  //     headers: {'Content-Type': 'application/json'}
+  //   })
+  //   const prepayJson = await prepay.json();
+  //   if (prepayJson.err) return onSubmit(prepayJson.err);
+
+
+  //   const success = (res) => {
+  //     onSubmit('支付成功');
+  //   }
+
+  //   prepayJson['success'] = success;
+  //   delete prepayJson['appId'];
+
+  //   wx.chooseWXPay(prepayJson);
+  // }
 
   const renderTable = (arr) => arr.map((a, index) => <tr key={index}><th>{a.t}:</th><td>{a.v}</td></tr>)
 
