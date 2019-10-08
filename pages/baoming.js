@@ -14,9 +14,9 @@ import Status from '../components/subpage/status';
 const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png';
 const page = {
   pageTitle: '大赛报名通道',
-  shareTitle: '报名通道',
+  shareTitle: '大赛报名通道',
   shareDesc: '寒假全国各大青少年艺术比赛开始报名了！',
-  shareLink: 'https://yingxitech.com/baoming'
+  shareLink: 'https://yingxitech.com/bsinfo'
 }
 
 class Baoming extends React.PureComponent {
