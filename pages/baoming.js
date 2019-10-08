@@ -15,7 +15,7 @@ const icon_url = 'https://yingxitech.com/static/bisai/android-chrome-192x192.png
 const page = {
   pageTitle: '大赛报名通道',
   shareTitle: '报名通道',
-  shareDesc: '中原青少年艺术赛事网，报名通道即将开启',
+  shareDesc: '寒假全国各大青少年艺术比赛开始报名了！',
   shareLink: 'https://yingxitech.com/baoming'
 }
 
@@ -51,7 +51,7 @@ class Baoming extends React.PureComponent {
           imgUrl: icon_url, // 分享图标
         });
         wx.updateTimelineShareData({ 
-          title: page.shareTitle, // 分享标题
+          title: page.shareDesc, // 分享标题
           link: page.shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: icon_url, // 分享图标
         })
@@ -176,6 +176,9 @@ async function getConfig () {
   }catch(e) {
     return JSON.stringify({type: 'request error', error: e});
   }
+
+  if (data.err) return;
+
   wx.config({
     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId, // 必填，公众号的唯一标识
@@ -184,5 +187,4 @@ async function getConfig () {
     signature: data.signature,// 必填，签名
     jsApiList: apiList // 必填，需要使用的JS接口列表
   });
-  return 'config finished:' + JSON.stringify(data);
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../styles/form.scss';
-import wxpay from '../../lib/pay';
 
 class Payment extends React.PureComponent {
 
@@ -24,10 +23,6 @@ class Payment extends React.PureComponent {
     wx.chooseWXPay(prepayJson);
   }
 
-  // pay = async () => {
-  //   await wxpay(this.props.unionid, this.props.onSubmit);
-  // }
-
 
   render () {
   
@@ -38,7 +33,6 @@ class Payment extends React.PureComponent {
         <button onClick={this.pay}>支付确认</button>
         <p>注：缴费成功后即可获得参赛资格。所有参赛选手将获得比赛视频录制，专家评委点评指导，比赛媒体报道，精美参赛礼品， INGLEMIREPHARM’S英树商城优惠，免费写真照两组（郑州昭元儿童摄影），初赛成绩优异者报送全国总决赛。</p>
       </div>
-      
     )
   }
     

@@ -20,9 +20,6 @@ export default ({statusData, onSubmit}) => {
     {t: '缴费状态',v: statusData.bisai_paid?'已支付':'未支付'}
   ];
 
-  // const pay = async () => {
-  //   await wxpay(statusData.unionid, onSubmit);
-  // }
   const pay = async () => {
     const prepay = await fetch('https://api.yingxitech.com/pay/request', {
       method: 'POST',

@@ -1,7 +1,6 @@
 import React from 'react';
 import validator from 'validator';
 import '../../styles/form.scss';
-import cuid from 'cuid';
 import {ops, renderAge, type, groupType} from '../../lib/formData';
 import Select from '../form/select';
 import Area from '../form/area';
