@@ -29,9 +29,12 @@ li {
 
 .info_body {
   position: relative;
+  min-height: 100vh;
   max-width: 900px;
   width: 95vw;
   margin: auto;
+  color: #fff;
+  background-color: #fff;
 }
 
 .info_title {
