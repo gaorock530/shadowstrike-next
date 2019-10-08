@@ -64,45 +64,48 @@ class BSinfo extends React.PureComponent {
           <title>比赛报名流程</title>
           <script src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
         </Head>
-        <div className="info_title"><h3>寒假青少年艺术比赛报名流程</h3></div>
-        <div className="info_liucheng">
-          <h3>一、比赛介绍</h3>
-          <ul>
-            <li>1. 2020年“中国之星”北京少儿春晚</li>
-            <div className="info-img">
-              <div className="info-img-x1"></div>
-              <div className="info-img-x2"></div>
-            </div>
-            <li>2. 第28节中国上海世界青少年“金玉兰奖”大赛</li>
-            <div className="info-img">
-              <div className="info-img-j1"></div>
-              <div className="info-img-j2"></div>
-            </div>
-          </ul>
-          <h5>*比赛详情进入官方公众号查询</h5>
-          <h3>二、参赛要求</h3>
-          <ul>
-            <li>1. 年龄：5 - 25岁</li>
-            <li>2. 节目类型： 舞蹈、声乐、器乐、表演、语言、书画</li>
-            <li>3. 节目主题要求健康向上，具有时代感和少年儿童特征及艺术性、民族性。 作品提倡原创，集体节目表演时长4分钟以内，个人节目3分钟以内（如超时会叫停）</li>
-          </ul>
-          <h3>三、时间安排</h3>
-          <ul>
-            <li>1. 报名时间：2019年10月1日 - 2019年11月15日</li>
-            <li>2. 河南赛区初赛： 2019年11月23、24日</li>
-            <li>3. 全国总决赛： 2020年1月14、15日</li>
-          </ul>
-          <h3>四、报名方法</h3>
-          <ul>
-            <li>1. 搜索公众号“中原青少年艺术赛事网”并关注。</li>
-            <li>2. 进入公众号，点击菜单 “我要参加” 下的 “报名” 按钮。</li>
-            <li>3. 填写参赛表格，选择报选大赛：“中国之星”或“金玉兰奖”。</li>
-          </ul>
+        <div className="info-inner">
+          <div className="info_title"><h3>寒假青少年艺术比赛报名流程</h3></div>
+          <div className="info_liucheng">
+            <h3>一、比赛介绍</h3>
+            <ul>
+              <li>1. 2020年 “中国之星” 北京少儿春晚</li>
+              <div className="info-img">
+                <div className="info-img-x1"></div>
+                <div className="info-img-x2"></div>
+              </div>
+              <li>2. 第28节中国上海世界青少年 “金玉兰奖” 大赛</li>
+              <div className="info-img">
+                <div className="info-img-j1"></div>
+                <div className="info-img-j2"></div>
+              </div>
+            </ul>
+            <h5>* 比赛详情进入官方公众号查询</h5>
+            <h3>二、参赛要求</h3>
+            <ul>
+              <li>1. 年龄：5 - 25岁</li>
+              <li>2. 节目类型： 舞蹈、声乐、器乐、表演、语言、书画</li>
+              <li>3. 节目主题要求健康向上，具有时代感和少年儿童特征及艺术性、民族性。 作品提倡原创，集体节目表演时长4分钟以内，个人节目3分钟以内（如超时会叫停）</li>
+            </ul>
+            <h3>三、时间安排</h3>
+            <ul>
+              <li>1. 报名时间：2019年10月1日 - 2019年11月15日</li>
+              <li>2. 河南赛区初赛： 2019年11月23、24日</li>
+              <li>3. 全国总决赛： 2020年1月14、15日</li>
+            </ul>
+            <h3>四、报名方法</h3>
+            <ul>
+              <li>1. 搜索公众号 “中原青少年艺术赛事网” 并关注。</li>
+              <li>2. 进入公众号，点击菜单 “我要参加” 下的 “报名” 按钮。</li>
+              <li>3. 填写参赛表格，选择报选大赛：“中国之星” 或 “金玉兰奖”。</li>
+            </ul>
+          </div>
+          <div className="info-qrcode">
+            <h5>长按下方二维码进入公众号</h5>
+            <img src="/static/info/qrcode_for_gh_17a95697c75e_344.jpg"/>
+          </div>
         </div>
-        <div className="info-qrcode">
-          <h5>长按下方二维码进入公众号</h5>
-          <img src="/static/info/qrcode_for_gh_17a95697c75e_344.jpg"/>
-        </div>
+        
       </div>
     )
   }

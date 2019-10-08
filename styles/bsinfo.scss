@@ -37,26 +37,37 @@ li {
   background-color: #fff;
 }
 
+.info-inner {
+  padding: 20px;
+}
+
 .info_title {
   padding: 20px 0;
   h3 {
     padding: 20px 0;
-    border-bottom: 1px solid #000;
+    border: 1px solid orangered;
     font-weight: 400;
     letter-spacing: 3px;
+    color: orangered;
   }
 }
 
 .info_liucheng {
+  text-align: left;
+  line-height: 1.6rem;
+  li {
+    color: #333;
+  }
+
   h3 {
     padding: 20px 0;
     font-weight: 400;
   }
   h5 {
-    font-weight: 300;
+    font-weight: 500;
+    color: #333;
   }
-  text-align: left;
-  line-height: 1.6rem;
+  
 
   .info-img {
     &>div {
