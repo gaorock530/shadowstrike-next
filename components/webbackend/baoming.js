@@ -95,7 +95,7 @@ export default class Baoming extends React.PureComponent {
 
 async function getRace (page) {
   try {
-    const res = await fetch(`${process.env.HOST}/races?page=${page}`, {
+    const res = await fetch(`https://api.yingxitech.com/races?page=${page}`, {
       method: 'POST',
       body: JSON.stringify({token: '123'}),
       headers: {'Content-Type': 'application/json'}

@@ -63,7 +63,7 @@ export default class Baoming extends React.PureComponent {
 
 async function newRefer (name) {
   try {
-    const res = await fetch(`${process.env.HOST}/refer/register`, {
+    const res = await fetch(`https://api.yingxitech.com/refer/register`, {
       method: 'POST',
       body: JSON.stringify({name}),
       headers: {'Content-Type': 'application/json'}
@@ -79,7 +79,7 @@ async function newRefer (name) {
 
 async function getRefer (page) {
   try {
-    const res = await fetch(`${process.env.HOST}/refers?page=${page}`, {
+    const res = await fetch(`https://api.yingxitech.com/refers?page=${page}`, {
       method: 'POST',
       body: JSON.stringify({token: '123'}),
       headers: {'Content-Type': 'application/json'}

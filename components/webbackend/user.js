@@ -63,7 +63,7 @@ export default class User extends React.PureComponent {
 
 async function getUser (page) {
   try {
-    const res = await fetch(`${process.env.HOST}/users?page=${page}`, {
+    const res = await fetch(`https://api.yingxitech.com/users?page=${page}`, {
       method: 'POST',
       body: JSON.stringify({token: '123'}),
       headers: {'Content-Type': 'application/json'}
