@@ -83,9 +83,7 @@ class Baoming extends React.PureComponent {
       response = await fetch('https://api.yingxitech.com/user', {
         method: 'POST',
         body: JSON.stringify({unionid: this.props.query.unionid}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: {'Content-Type': 'application/json'}
       });
         
 
@@ -138,7 +136,7 @@ class Baoming extends React.PureComponent {
           <h5>欢迎来到中原青少年艺术赛事网</h5>
 
           <div className="user-icon" style={{backgroundImage: `url(\'${this.state.pic}\')`}}></div>
-          {this.props.query && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
+          {this.props.query.subscribe && this.props.query.subscribe === '0'?<h6>温馨提示：请先关注本公众号才能获得报名资格</h6>:
             <div>
               {this.state.stage === 0 && <BaomingForm unionid={this.props.query.unionid} onConfirm={this.onConfirm}/>}
               {this.state.stage === 1 && <Confirm unionid={this.props.query.unionid} onSubmit={this.onSubmit} formData={this.formData}/>}
@@ -168,9 +166,7 @@ async function getConfig () {
         noncestr,
         url: window.location.href
       }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: {'Content-Type': 'application/json'}
     });
     data = await res.json();
   }catch(e) {

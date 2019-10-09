@@ -27,6 +27,7 @@ const errMsg3 = "验证码不正确";
       groupName: '',
       showName: '',
       contectPhone: '',
+      bscode: '', // 优惠码
       lockPhone: false,
       code: '',
       valid_name: false,
@@ -53,29 +54,38 @@ const errMsg3 = "验证码不正确";
       !this.state.valid_showName || 
       !this.state.valid_contectPhone || 
       (this.state.groupType !== 0 && !this.state.valid_groupName)) return;
+    
 
-    const codeVerify = await fetch('https://api.yingxitech.com/code/verify', {
-      method: 'POST',
-      body: JSON.stringify({
-        unionid: this.props.unionid,
-        phone: this.state.contectPhone,
-        code: this.state.code
-      }),
-      headers: {
-        'Content-Type': 'application/json'
+    let codeRes;
+    try {
+      const codeVerify = await fetch('https://api.yingxitech.com/code/verify', {
+        method: 'POST',
+        body: JSON.stringify({
+          unionid: this.props.unionid,
+          phone: this.state.contectPhone,
+          code: this.state.code
+        }),
+        headers: {'Content-Type': 'application/json'}
+      });
+  
+      codeRes = await codeVerify.json();
+
+      if (!codeRes.err) {
+        clearTimeout(this.timer);
+        console.log(this.state)
+        this.props.onConfirm(this.state)
+      } else {
+        this.setState({showError: true});
+        this.timer = setTimeout(() => {this.setState({showError: false})}, 3000);
       }
-    });
+      
+    }catch(e) {
 
-    const codeRes = await codeVerify.json();
-
-    if (!codeRes.err) {
-      clearTimeout(this.timer);
-      console.log(this.state)
-      this.props.onConfirm(this.state)
-    } else {
-      this.setState({showError: true});
-      this.timer = setTimeout(() => {this.setState({showError: false})}, 3000);
     }
+
+    
+
+    
   }
 
   validateName = (value) => {
@@ -108,6 +118,7 @@ const errMsg3 = "验证码不正确";
         {this.state.showError && <span style={{color: 'red'}}>{errMsg3}</span>}
         <Select ops={groupType} onChange={this.onChange.bind(this, 'groupType')} title="参赛单位类型"/>
         {String(this.state.groupType) !== '0' && <Input title="参赛单位名称" placeholder="幼儿园/学校/培训机构名称" onBlur={this.onBlur.bind(this, 'groupName')} validation={this.validateName} errMsg={errMsg1}/>}
+        <Input title="参赛优惠码" placeholder="(选填)优惠码" onChange={this.onChange.bind(this, 'bscode')}/>
         
         <Button/>
       </form>

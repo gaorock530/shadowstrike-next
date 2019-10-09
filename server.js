@@ -1,3 +1,5 @@
+// load config.json
+require('./config');
 const express = require('express');
 const next = require('next');
 const dev = process.env.NODE_ENV !== 'production';
@@ -5,6 +7,9 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const PORT = process.env.PORT || 3000;
+const auth = require('./midware/auth');
+
+
 
 app.prepare()
 .then(() => {
@@ -19,6 +24,10 @@ app.prepare()
   // server.get('/shop/MP_verify_FdS96m4Og6Nb5Yrw.txt', (req, res) => {
   //   res.send('FdS96m4Og6Nb5Yrw');
   // })
+  server.get('/bsbackend', auth, (req, res) => {
+    console.log('/backend')
+    return handle(req, res);
+  })
 
   server.get('*', (req, res) => {
     return handle(req, res);

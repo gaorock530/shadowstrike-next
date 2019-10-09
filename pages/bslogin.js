@@ -22,7 +22,7 @@ class BsLogin extends React.PureComponent {
     //https://open.weixin.qq.com/connect/qrconnect?appid=wxbdc5610cc59c1631&redirect_uri=https%3A%2F%2Fpassport.yhd.com%2Fwechat%2Fcallback.do&response_type=code&scope=snsapi_login&state=3d6be0a4035d839573b04816624a415e#wechat_redirect
     
     try {
-      var obj = new WxLogin({
+      new WxLogin({
         self_redirect:false,
         id:"qr_code", 
         appid: "wxb751a892b92c78f8", 
@@ -48,8 +48,6 @@ class BsLogin extends React.PureComponent {
         <div className="relative_body">
           <div id="qr_code"></div>
         </div>
-        
-        
       </div>
     )
   }
