@@ -31,7 +31,7 @@ export default class User extends React.PureComponent {
       <td>{a.wx_city}</td>
       <td>{a.visit_times || 1}</td>
       <td>{parseDate(a.lastVisit.time)}</td>
-      <td><FontAwesomeIcon icon={a.baoming_id?faCheck:faTimes} className={'form-icon ' + (a.baoming_id?'pass':'error')}/></td>
+      <td><FontAwesomeIcon icon={a.baoming_id?faCheck:faTimes} className={'table-icon ' + (a.baoming_id?'pass':'error')}/></td>
     </tr>
   ))
 

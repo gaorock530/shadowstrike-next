@@ -38,7 +38,7 @@ export default class Baoming extends React.PureComponent {
       <td>{a.baoming_groupName}</td>
       <td>{a.baoming_code}</td>
       <td>{a.baoming_code_refer}</td>
-      <td><FontAwesomeIcon icon={a.bisai_paid?faCheck:faTimes} className={'form-icon ' + (a.bisai_paid?'pass':'error')}/></td>
+      <td><FontAwesomeIcon icon={a.bisai_paid?faCheck:faTimes} className={'table-icon ' + (a.bisai_paid?'pass':'error')}/></td>
       <td>{a.bisai_paid_amount || 0}</td>
       
     </tr>
