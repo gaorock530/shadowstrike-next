@@ -1,7 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
-import '../styles/baoming.scss'
-import Meta from '../components/bisaiMeta'
+import '../styles/backend.scss';
+import Meta from '../components/bisaiMeta';
+import Nav from '../components/webbackend/nav';
+import Body from '../components/webbackend/body';
 
 
 
@@ -9,7 +11,7 @@ class BsBackend extends React.PureComponent {
   constructor (props) {
     super(props);
     this.state = {
-      status: ''
+      nav: 0
     }
   }
 
@@ -27,19 +29,19 @@ class BsBackend extends React.PureComponent {
       console.log('query:', this.props.user);
     }catch(e) {
       console.log(e)
-      
     }
   }
 
   render () {
     return (
-      <div className="baoming_body">
+      <div className="backend_body">
         <Meta/>
         <Head>
           <title>管理后台页面</title>
         </Head>
-        <div className="relative_body">
-          <div>{JSON.stringify(this.props.query)}</div>
+        <Nav onChangeNav={(index) => this.setState({nav: index})} active={this.state.nav}/>
+        <div className="backend_main">
+          <Body navIndex={this.state.nav}/>
         </div>
         
         

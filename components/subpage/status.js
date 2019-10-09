@@ -16,6 +16,7 @@ export default ({statusData, onSubmit}) => {
     {t: '参赛单位类型', v: groupType[Number(statusData.baoming_groupType)].name},
     {t: '参赛单位名称', v: statusData.baoming_groupName || '无'},
     {t: '联系电话', v: statusData.baoming_phone},
+    {t: '报名码', v:statusData.baoming_code},
     {t: '报名状态', v: '已报名'},
     {t: '缴费状态',v: statusData.bisai_paid?'已支付':'未支付'}
   ];

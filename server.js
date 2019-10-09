@@ -24,10 +24,10 @@ app.prepare()
   // server.get('/shop/MP_verify_FdS96m4Og6Nb5Yrw.txt', (req, res) => {
   //   res.send('FdS96m4Og6Nb5Yrw');
   // })
-  server.get('/bsbackend', auth, (req, res) => {
-    console.log('/backend')
-    return handle(req, res);
-  })
+  // server.get('/bsbackend', auth, (req, res) => {
+  //   console.log('/backend')
+  //   return handle(req, res);
+  // })
 
   server.get('*', (req, res) => {
     return handle(req, res);
