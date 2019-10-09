@@ -41,7 +41,7 @@ export default class Baoming extends React.PureComponent {
   render () {
     return (
       <div className="backend_content">
-        <div className="plus" onClick={this.newRefer}><FontAwesomeIcon icon={faPlus} className='form-icon'/></div>
+        <div className="plus" onClick={this.newRefer}><FontAwesomeIcon icon={faPlus} className='table-icon'/></div>
         <table>
           <thead>
             <tr>
