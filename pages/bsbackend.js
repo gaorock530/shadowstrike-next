@@ -16,13 +16,15 @@ class BsBackend extends React.PureComponent {
   static async getInitialProps({ req }) {
     // const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
     const query = req ? req.query : null;
-    return { query }
+    const user = req? req.user : null;
+    return { query, user }
   }
 
   async componentDidMount () {
     // https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx09fc8bca51c925c7&redirect_uri=https%3A%2F%2Fapi.yingxitech.com%2Fwxlogin%3Ftype%3Dbaoming&response_type=code&scope=snsapi_userinfo&state=baoming#wechat_redirect
     try {
       console.log('query:', this.props.query);
+      console.log('query:', this.props.user);
     }catch(e) {
       console.log(e)
       
