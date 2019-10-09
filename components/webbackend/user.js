@@ -24,7 +24,7 @@ export default class User extends React.PureComponent {
 
   renderUser = (arr) => arr.map((a, index) => (
     <tr key={index}>
-      <th><div className="icon" style={{'backgroundImage': `url('${a.pic}')`}}></div></th>
+      <th><div className="icon" style={a.pic?{'backgroundImage': `url('${a.pic}')`}:null}></div></th>
       <td>{a.nickname}</td>
       <td>{a.sex===0?'未知':(a.sex===1?'男':'女')}</td>
       <td>{a.wx_province}</td>
